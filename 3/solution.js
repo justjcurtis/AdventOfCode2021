@@ -77,5 +77,7 @@ const solution2 = (input) => {
     return parseInt(oxy, 2) * parseInt(co2, 2)
 }
 
-console.log('Part 1:', solution1(input)) // 2498354
-console.log('Part 2:', solution2(input)) // 3277956
+module.exports = { solution1, epsilonGammaFromBinMap, binMapForInput, solution2, mcbPos, lcbPos, reduction }
+
+// console.log('Part 1:', solution1(input)) // 2498354
+// console.log('Part 2:', solution2(input)) // 3277956
