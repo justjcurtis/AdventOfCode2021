@@ -49,5 +49,7 @@ const solution = (input, cmdHandler) => {
     return { h, d, t: h * d }
 }
 
-console.log('Part 1:', solution(input, part1Handler)) // .t 1947824
-console.log('Part 2:', solution(input, part2Handler)) // .t 1813062561
+module.exports = { part1Handler, part2Handler, solution }
+
+// console.log('Part 1:', solution(input, part1Handler)) // .t 1947824
+// console.log('Part 2:', solution(input, part2Handler)) // .t 1813062561
