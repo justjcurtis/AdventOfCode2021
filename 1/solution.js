@@ -22,5 +22,7 @@ const solution = (input) => {
     return count
 }
 
-console.log("Part 1:", solution(input)) // 1602
-console.log("Part 2:", solution(createSlidingWindow(input))) // 1633
+module.exports = { solution, createSlidingWindow }
+
+// console.log("Part 1:", solution(input)) // 1602
+// console.log("Part 2:", solution(createSlidingWindow(input))) // 1633
