@@ -1,4 +1,4 @@
-const { part1Handler, part2Handler } = require('./solution')
+const { solution, part1Handler, part2Handler } = require('./solution')
 const { input } = require('./testData')
 
 describe('Day 2', () => {
@@ -87,6 +87,17 @@ describe('Day 2', () => {
             expect(result.a).toBe(a - x)
             expect(result.d).toBe(d)
             expect(result.h).toBe(h)
+        })
+    })
+
+    describe('solution', () => {
+        test('solution with part1handler should return {"d": 10, "h": 15, "t": 150}', () => {
+            const result = solution(input, part1Handler)
+            expect(result).toStrictEqual({ "d": 10, "h": 15, "t": 150 })
+        })
+        test('solution with part2handler should return {"d": 60, "h": 15, "t": 900}', () => {
+            const result = solution(input, part2Handler)
+            expect(result).toStrictEqual({ "d": 60, "h": 15, "t": 900 })
         })
     })
 })
