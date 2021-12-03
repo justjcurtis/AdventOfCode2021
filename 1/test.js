@@ -15,4 +15,16 @@ describe('Day 1', () => {
             expect(result.join(',')).toBe(expected.join(','))
         })
     })
+
+    describe('solution', () => {
+        const solutionTestData = [
+            [input, 7],
+            [createSlidingWindow(input, 1), 7],
+            [createSlidingWindow(input, 3), 5],
+        ]
+        test.each(solutionTestData)('should create list of sums of window of size n', (input, expected) => {
+            const result = solution(input)
+            expect(result).toBe(expected)
+        })
+    })
 })
