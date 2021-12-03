@@ -1,5 +1,3 @@
-const input = require('./input')
-
 const epsilonGammaFromBinMap = binMap => {
     let e = ''
     let g = ''
@@ -78,6 +76,3 @@ const solution2 = (input) => {
 }
 
 module.exports = { solution1, epsilonGammaFromBinMap, binMapForInput, solution2, mcbPos, lcbPos, reduction }
-
-// console.log('Part 1:', solution1(input)) // 2498354
-// console.log('Part 2:', solution2(input)) // 3277956

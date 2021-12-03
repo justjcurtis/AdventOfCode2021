@@ -1,5 +1,3 @@
-const input = require('./input')
-
 const createSlidingWindow = (input, n = 3) => {
     const windowed = []
     for (let i = 0; i <= input.length - n; i++) {
@@ -23,6 +21,3 @@ const solution = (input) => {
 }
 
 module.exports = { solution, createSlidingWindow }
-
-// console.log("Part 1:", solution(input)) // 1602
-// console.log("Part 2:", solution(createSlidingWindow(input))) // 1633
