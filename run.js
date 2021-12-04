@@ -21,7 +21,6 @@ console.log("--- Day 3 ---")
 console.log('Part 1:', day3.solution1(day3Input)) // 2498354
 console.log('Part 2:', day3.solution2(day3Input)) // 3277956
 console.log('-------------')
-console.log('-------------')
 console.log()
 console.log("--- Day 4 ---")
 console.log('Part 1:', day4.getFirstBoardToWin(day4Input.boards, day4Input.drawings)) // 63552
