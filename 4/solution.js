@@ -31,23 +31,35 @@ const checkWin = (markings, i, j) => {
     return true
 }
 
+const boardValueMap = (board) => {
+    const map = {}
+    const x = board[0].length
+    const y = board.length
+    for (let i = 0; i < x; i++) {
+        for (let j = 0; j < y; j++) {
+            const val = board[i][j]
+            if (map[val] == undefined) {
+                map[val] = []
+            }
+            map[val].push([i, j])
+        }
+    }
+    return map
+}
+
 const completeBoard = (board, drawings) => {
-    // refactor to use board value map to optimise
     const x = board[0].length
     const y = board.length
     const markings = getBlankMarkings(x, y)
+    const bvm = boardValueMap(board)
     let count = 0
     for (const draw of drawings) {
         count++
-        for (let i = 0; i < x; i++) {
-            const row = board[i]
-            for (let j = 0; j < y; j++) {
-                const val = row[j]
-                if (val == draw) {
-                    markings[i][j] = true
-                    const win = checkWin(markings, i, j)
-                    if (win) return { board, count, draw, markings }
-                }
+        if (bvm[draw] != undefined) {
+            for (const [i, j] of bvm[draw]) {
+                markings[i][j] = true
+                const win = checkWin(markings, i, j)
+                if (win) return { board, count, draw, markings }
             }
         }
     }
@@ -98,4 +110,3 @@ module.exports = {
     getLastBoardToWin,
     getScore
 }
-console.log(getFirstBoardToWin(boards, drawings))
