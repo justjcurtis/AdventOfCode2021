@@ -1,17 +1,23 @@
 const { boards, drawings } = require('./input')
 
-const getBlankMarkings = () => [
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-    [false, false, false, false, false],
-]
+const getBlankMarkings = (x = 5, y = 5) => {
+    const markings = []
+    for (let a = 0; a < x; a++) {
+        const row = []
+        for (let b = 0; b < y; b++) {
+            row.push(false)
+        }
+        markings.push(row)
+    }
+    return markings
+}
 
 const checkWin = (markings, i, j) => {
+    const x = markings[0].length
+    const y = markings.length
     let win = true
     //check row
-    for (let c = 0; c < 5; c++) {
+    for (let c = 0; c < x; c++) {
         if (!markings[i][c]) {
             win = false
             break
@@ -19,7 +25,7 @@ const checkWin = (markings, i, j) => {
     }
     if (win) return true
     //check col
-    for (let r = 0; r < 5; r++) {
+    for (let r = 0; r < y; r++) {
         if (!markings[r][j]) return false
     }
     return true
@@ -27,13 +33,15 @@ const checkWin = (markings, i, j) => {
 
 const completeBoard = (board, drawings) => {
     // refactor to use board value map to optimise
-    const markings = getBlankMarkings()
+    const x = board[0].length
+    const y = board.length
+    const markings = getBlankMarkings(x, y)
     let count = 0
     for (const draw of drawings) {
         count++
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < x; i++) {
             const row = board[i]
-            for (let j = 0; j < 5; j++) {
+            for (let j = 0; j < y; j++) {
                 const val = row[j]
                 if (val == draw) {
                     markings[i][j] = true
@@ -47,9 +55,11 @@ const completeBoard = (board, drawings) => {
 }
 
 const getScore = win => {
+    const x = win.markings[0].length
+    const y = win.markings.length
     let sum = 0
-    for (let i = 0; i < 5; i++) {
-        for (let j = 0; j < 5; j++) {
+    for (let i = 0; i < x; i++) {
+        for (let j = 0; j < y; j++) {
             if (!win.markings[i][j]) {
                 sum += win.board[i][j]
             }
@@ -88,3 +98,4 @@ module.exports = {
     getLastBoardToWin,
     getScore
 }
+console.log(getFirstBoardToWin(boards, drawings))
