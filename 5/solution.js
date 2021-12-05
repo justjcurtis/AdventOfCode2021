@@ -1,5 +1,3 @@
-const input = require('./input')
-
 const newGrid = (x = 1000, y = 1000) => {
     const grid = []
     for (let i = 0; i < x; i++) {
@@ -104,7 +102,7 @@ const countThreshold = (grid, min = 2) => {
     return count
 }
 
-const part1 = input => {
+const solution = input => {
     const lines = parseInput(input)
     const straight = lines.slice(0).filter(line => isCardinal(line))
     const diagonal = lines.slice(0).filter(line => isDiagonal(line))
@@ -113,4 +111,4 @@ const part1 = input => {
     return { straight: countThreshold(straightGrid), all: countThreshold(fullGrid) }
 }
 
-console.log(part1(input))
+module.exports = { solution }
