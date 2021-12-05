@@ -111,4 +111,26 @@ const solution = input => {
     return { straight: countThreshold(straightGrid), all: countThreshold(fullGrid) }
 }
 
-module.exports = { solution }
+
+
+
+
+
+
+
+
+
+
+module.exports = {
+    countThreshold,
+    getPoints,
+    isCardinal,
+    isDiagonal,
+    isHorizontal,
+    isVertical,
+    mapLines,
+    newGrid,
+    parseInput,
+    parseLine,
+    solution
+}
