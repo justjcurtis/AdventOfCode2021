@@ -10,6 +10,14 @@ const newGrid = (x = 1000, y = 1000) => {
     return grid
 }
 
+const copyGrid = grid => {
+    const copy = []
+    for (const row of grid) {
+        copy.push(row.slice(0))
+    }
+    return copy
+}
+
 const parseLine = line => {
     const [aString, bString] = line.split(' -> ')
     const aVals = aString.split(',')
@@ -98,7 +106,7 @@ const solution = input => {
     const straight = lines.slice(0).filter(line => isCardinal(line))
     const diagonal = lines.slice(0).filter(line => isDiagonal(line))
     const straightGrid = mapLines(straight)
-    const fullGrid = mapLines(diagonal, JSON.parse(JSON.stringify(straightGrid)))
+    const fullGrid = mapLines(diagonal, copyGrid(straightGrid))
     return { straight: countThreshold(straightGrid), all: countThreshold(fullGrid) }
 }
 
