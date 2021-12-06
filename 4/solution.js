@@ -65,6 +65,7 @@ const completeBoard = (board, drawings) => {
 }
 
 const getScore = win => {
+    if (win == undefined) return undefined
     const x = win.markings[0].length
     const y = win.markings.length
     let sum = 0

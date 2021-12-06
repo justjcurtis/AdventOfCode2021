@@ -23,6 +23,7 @@ describe('Day 4', () => {
             [1, expectedCompletions[0], boards[0]],
             [2, expectedCompletions[1], boards[1]],
             [3, expectedCompletions[2], boards[2]],
+            [4, expectedCompletions[3], boards[3]],
         ]
         test.each(completeTestData)('given board %p from test data should return %p', (_, expected, board) => {
             const result = completeBoard(board, drawings)
@@ -62,18 +63,27 @@ describe('Day 4', () => {
             const result = getFirstBoardToWin(boards, drawings)
             expect(result).toBe(4512)
         })
+        test('should return undefined when no boards come first', () => {
+            const result = getFirstBoardToWin([boards[1]], drawings)
+            expect(result).toBe(undefined)
+        })
     })
     describe('getLastBoardToWin', () => {
         test('should return expected last board to win hash', () => {
             const result = getLastBoardToWin(boards, drawings)
             expect(result).toBe(1924)
         })
+        test('should return undefined when no boards come last', () => {
+            const result = getLastBoardToWin([boards[1]], drawings)
+            expect(result).toBe(undefined)
+        })
     })
     describe('getScore', () => {
         const scoreTestData = [
             [1, 2192, completeBoard(boards[0], drawings)],
-            [2, 1924, completeBoard(boards[1], drawings)],
-            [3, 4512, completeBoard(boards[2], drawings)],
+            [2, undefined, completeBoard(boards[1], drawings)],
+            [3, 1924, completeBoard(boards[2], drawings)],
+            [4, 4512, completeBoard(boards[3], drawings)],
         ]
         test.each(scoreTestData)('given board %p from test data, should return %p', (_, expected, win) => {
             const result = getScore(win)
