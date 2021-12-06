@@ -1,5 +1,3 @@
-
-
 const mcbPos = (input, i) => {
     const counter = { '0': 0, '1': 0 }
     for (const bin of input) {
@@ -12,7 +10,8 @@ const lcbPos = (input, i) => {
     const mcb = mcbPos(input, i)
     return mcb == '0' ? '1' : '0'
 }
-const epsilonGammaFromBinMap = input => {
+
+const epsilonGamma = input => {
     let g = ''
     let e = ''
     for (let i = 0; i < input[0].length; i++) {
@@ -32,17 +31,18 @@ const reduction = (input, bias, i = 0) => {
             saved.push(bin)
         }
     }
+
     if (saved.length == 1) {
         return saved[0]
     } else if (saved.length > 1) {
         return reduction(saved, bias, i + 1)
-    } else {
-        return reduction(input, bias, i + 1)
     }
+
+    return reduction(input, bias, i + 1)
 }
 
 const solution1 = input => {
-    const { e, g } = epsilonGammaFromBinMap(input)
+    const { e, g } = epsilonGamma(input)
     return e * g
 }
 
@@ -53,4 +53,4 @@ const solution2 = (input) => {
     return parseInt(oxy, 2) * parseInt(co2, 2)
 }
 
-module.exports = { solution1, epsilonGammaFromBinMap, solution2, mcbPos, lcbPos, reduction }
+module.exports = { solution1, epsilonGamma, solution2, mcbPos, lcbPos, reduction }

@@ -12,6 +12,5 @@ const input = [
     '00010',
     '01010'
 ]
-const binMap = [{ "0": 5, "1": 7 }, { "0": 7, "1": 5 }, { "0": 4, "1": 8 }, { "0": 5, "1": 7 }, { "0": 7, "1": 5 }]
 
-module.exports = { input, binMap }
+module.exports = { input }
