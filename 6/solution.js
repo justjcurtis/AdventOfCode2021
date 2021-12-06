@@ -1,8 +1,5 @@
 const getFishMap = fish => {
-    const map = {}
-    for (let i = 0; i < 9; i++) {
-        map[i] = 0
-    }
+    const map = new Array(9).fill(0)
     for (const f of fish) {
         map[f]++
     }
@@ -10,19 +7,18 @@ const getFishMap = fish => {
 }
 
 const tick = (fishMap, n) => {
+    const newFishMap = fishMap.slice(0)
     for (let i = 0; i < n; i++) {
-        const newFish = fishMap[0]
+        const newFish = newFishMap[0]
         for (let j = 0; j < 8; j++) {
-            fishMap[j] = fishMap[j + 1]
+            newFishMap[j] = newFishMap[j + 1]
         }
-        fishMap[8] = newFish
-        fishMap[6] += newFish
+        newFishMap[8] = newFish
+        newFishMap[6] += newFish
     }
-    return fishMap
+    return newFishMap
 }
 
-const countMap = map => Object.values(map).reduce((v, acc) => acc + v, 0)
+const solution = (fish, days) => tick(getFishMap(fish), days).reduce((v, acc) => acc + v, 0)
 
-const solution = (fish, days) => countMap(tick(getFishMap(fish), days))
-
-module.exports = { countMap, getFishMap, solution, tick }
+module.exports = { getFishMap, solution, tick }
