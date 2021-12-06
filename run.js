@@ -3,11 +3,13 @@ const day2Input = require('./2/input')
 const day3Input = require('./3/input')
 const day4Input = require('./4/input')
 const day5Input = require('./5/input')
+const day6Input = require('./6/input')
 const day1 = require('./1/solution')
 const day2 = require('./2/solution')
 const day3 = require('./3/solution')
 const day4 = require('./4/solution')
 const day5 = require('./5/solution')
+const day6 = require('./6/solution')
 
 console.log("--- Day 1 ---")
 console.log("Part 1:", day1.solution(day1Input)) // 1602
@@ -34,4 +36,9 @@ console.log("--- Day 5 ---")
 const day5Answer = day5.solution(day5Input)
 console.log('Part 1:', day5Answer.straight) // 4826
 console.log('Part 2:', day5Answer.all) // 16793
+console.log('-------------')
+console.log()
+console.log("--- Day 6 ---")
+console.log('Part 1:', day6.solution(day6Input, 80)) // 386755
+console.log('Part 2:', day6.solution(day6Input, 256)) // 1732731810807
 console.log('-------------')
