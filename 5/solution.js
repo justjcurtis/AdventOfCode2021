@@ -111,16 +111,6 @@ const solution = input => {
     return { straight: countThreshold(straightGrid), all: countThreshold(fullGrid) }
 }
 
-
-
-
-
-
-
-
-
-
-
 module.exports = {
     countThreshold,
     getPoints,
