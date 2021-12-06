@@ -33,9 +33,8 @@ console.log('-------------')
 console.log('-------------')
 console.log()
 console.log("--- Day 5 ---")
-const day5Answer = day5.solution(day5Input)
-console.log('Part 1:', day5Answer.straight) // 4826
-console.log('Part 2:', day5Answer.all) // 16793
+console.log('Part 1:', day5.solution(day5Input).straight) // 4826
+console.log('Part 2:', day5.solution(day5Input).all) // 16793
 console.log('-------------')
 console.log()
 console.log("--- Day 6 ---")
