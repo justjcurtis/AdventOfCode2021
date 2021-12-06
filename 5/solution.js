@@ -33,6 +33,11 @@ const isCardinal = (line) => isHorizontal(line) || isVertical(line)
 const isDiagonal = line => !isCardinal(line)
 
 const getPoints = ({ a, b }) => {
+    if (a.x > b.x) {
+        const t = a
+        a = b
+        b = t
+    }
     const points = []
     const horizontal = isHorizontal({ a, b })
     const vertical = isVertical({ a, b })
@@ -51,29 +56,15 @@ const getPoints = ({ a, b }) => {
     }
     if (diagonal) {
         let y = a.y
-        if (a.x < b.x) {
-            if (a.y < b.y) {
-                for (let i = a.x; i <= b.x; i++) {
-                    points.push({ x: i, y })
-                    y++
-                }
-            } else {
-                for (let i = a.x; i <= b.x; i++) {
-                    points.push({ x: i, y })
-                    y--
-                }
+        if (a.y < b.y) {
+            for (let i = a.x; i <= b.x; i++) {
+                points.push({ x: i, y })
+                y++
             }
         } else {
-            if (a.y < b.y) {
-                for (let i = a.x; i >= b.x; i--) {
-                    points.push({ x: i, y })
-                    y++
-                }
-            } else {
-                for (let i = a.x; i >= b.x; i--) {
-                    points.push({ x: i, y })
-                    y--
-                }
+            for (let i = a.x; i <= b.x; i++) {
+                points.push({ x: i, y })
+                y--
             }
         }
         return points
