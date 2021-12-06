@@ -1,5 +1,3 @@
-const { boards, drawings } = require('./input')
-
 const getBlankMarkings = (x = 5, y = 5) => {
     const markings = []
     for (let a = 0; a < x; a++) {
