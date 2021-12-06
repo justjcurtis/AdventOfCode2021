@@ -87,6 +87,7 @@ const getFirstBoardToWin = (boards, drawings) => {
             minWin = current
         }
     }
+    if (minWin == undefined) return undefined
     return getScore(minWin)
 }
 
@@ -99,6 +100,7 @@ const getLastBoardToWin = (boards, drawings) => {
             maxWin = current
         }
     }
+    if (maxWin == undefined) return undefined
     return getScore(maxWin)
 }
 
