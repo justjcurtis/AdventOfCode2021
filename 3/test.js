@@ -1,17 +1,11 @@
 const { input, binMap } = require('./testData')
-const { solution1, epsilonGammaFromBinMap, binMapForInput, solution2, mcbPos, lcbPos, reduction } = require('./solution')
+const { solution1, epsilonGammaFromBinMap, solution2, mcbPos, lcbPos, reduction } = require('./solution')
 
 describe('Day 3', () => {
     describe('epsilonGammaFromBinMap', () => {
-        test('should return {e:9, g:22} for binMap provided', () => {
-            const result = epsilonGammaFromBinMap(binMap)
+        test('should return {e:9, g:22} for input provided', () => {
+            const result = epsilonGammaFromBinMap(input)
             expect(result).toStrictEqual({ e: 9, g: 22 })
-        })
-    })
-    describe('binMapForInput', () => {
-        test('should return expected', () => {
-            const result = binMapForInput(input)
-            expect(result).toStrictEqual(binMap)
         })
     })
     describe('solution1', () => {

@@ -1,43 +1,4 @@
-const epsilonGammaFromBinMap = binMap => {
-    let e = ''
-    let g = ''
-    for (const m of binMap) {
-        if (m['0'] < m['1']) {
-            g += '1'
-            e += '0'
-        } else if (m['0'] > m['1']) {
-            g += '0'
-            e += '1'
-        } else {
-            throw "equal bits, what do ?"
-        }
-    }
-    return { e: parseInt(e, 2), g: parseInt(g, 2) }
-}
 
-const binMapForInput = input => {
-    const l = input[0].length
-    const binMap = []
-    for (const bin of input) {
-        for (let i = 0; i < l; i++) {
-            if (binMap[i] == undefined) {
-                binMap.push({ '0': 0, '1': 0 })
-            }
-            binMap[i][bin[i]]++
-        }
-    }
-    return binMap
-}
-
-const solution1 = input => {
-    const binMap = binMapForInput(input)
-    const { e, g } = epsilonGammaFromBinMap(binMap)
-    return e * g
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
 
 const mcbPos = (input, i) => {
     const counter = { '0': 0, '1': 0 }
@@ -50,6 +11,17 @@ const mcbPos = (input, i) => {
 const lcbPos = (input, i) => {
     const mcb = mcbPos(input, i)
     return mcb == '0' ? '1' : '0'
+}
+const epsilonGammaFromBinMap = input => {
+    let g = ''
+    let e = ''
+    for (let i = 0; i < input[0].length; i++) {
+        g += mcbPos(input, i)
+        e += g.slice(-1) == '0' ? '1' : '0'
+    }
+    e = parseInt(e, 2)
+    g = parseInt(g, 2)
+    return { e, g }
 }
 
 const reduction = (input, bias, i = 0) => {
@@ -69,10 +41,16 @@ const reduction = (input, bias, i = 0) => {
     }
 }
 
+const solution1 = input => {
+    const { e, g } = epsilonGammaFromBinMap(input)
+    return e * g
+}
+
+
 const solution2 = (input) => {
     let oxy = reduction(input.slice(0), mcbPos)
     let co2 = reduction(input.slice(0), lcbPos)
     return parseInt(oxy, 2) * parseInt(co2, 2)
 }
 
-module.exports = { solution1, epsilonGammaFromBinMap, binMapForInput, solution2, mcbPos, lcbPos, reduction }
+module.exports = { solution1, epsilonGammaFromBinMap, solution2, mcbPos, lcbPos, reduction }
