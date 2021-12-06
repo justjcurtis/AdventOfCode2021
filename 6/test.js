@@ -18,13 +18,13 @@ describe('Day 6', () => {
             [256, 26984457539],
             [1000, 3.795890611446983e+38]
         ]
-        test.each(solutionTestData)('given test input and %p days should return %p in <= 1ms', (days, expected) => {
+        test.each(solutionTestData)('given test input and %p days should return %p in <= 2ms', (days, expected) => {
             const start = Date.now()
             const result = solution(input, days)
             const end = Date.now()
             const msTaken = end - start
             expect(result).toBe(expected)
-            expect(msTaken).toBeLessThanOrEqual(1)
+            expect(msTaken).toBeLessThanOrEqual(2)
         })
     })
 
@@ -37,13 +37,13 @@ describe('Day 6', () => {
             [fishMaps[4], 256],
             [fishMaps[5], 1000]
         ]
-        test.each(tickTestData)('should return %p in <= 1ms given test input and %p days', (expected, days) => {
+        test.each(tickTestData)('should return %p in <= 2ms given test input and %p days', (expected, days) => {
             const start = Date.now()
             const result = tick(fishMaps[0], days)
             const end = Date.now()
             const msTaken = end - start
             expect(result).toStrictEqual(expected)
-            expect(msTaken).toBeLessThanOrEqual(1)
+            expect(msTaken).toBeLessThanOrEqual(2)
         })
     })
 })
