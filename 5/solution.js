@@ -1,11 +1,11 @@
 const newGrid = (x = 1000, y = 1000) => {
     const grid = []
+    const row = []
+    for (let j = 0; j < y; j++) {
+        row.push(0)
+    }
     for (let i = 0; i < x; i++) {
-        const row = []
-        for (let j = 0; j < y; j++) {
-            row.push(0)
-        }
-        grid.push(row)
+        grid.push(row.slice(0))
     }
     return grid
 }
@@ -33,11 +33,6 @@ const isCardinal = (line) => isHorizontal(line) || isVertical(line)
 const isDiagonal = line => !isCardinal(line)
 
 const getPoints = ({ a, b }) => {
-    if (a.x > b.x) {
-        const t = a
-        a = b
-        b = t
-    }
     const points = []
     const horizontal = isHorizontal({ a, b })
     const vertical = isVertical({ a, b })
@@ -53,6 +48,11 @@ const getPoints = ({ a, b }) => {
             points.push({ x: a.x, y: i })
         }
         return points
+    }
+    if (a.x > b.x) {
+        const t = a
+        a = b
+        b = t
     }
     if (diagonal) {
         let y = a.y
