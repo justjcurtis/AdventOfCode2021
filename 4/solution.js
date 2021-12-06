@@ -82,6 +82,7 @@ const getFirstBoardToWin = (boards, drawings) => {
     let minWin = undefined
     for (const board of boards) {
         const current = completeBoard(board, drawings)
+        if (current == undefined) continue
         if (minWin == undefined || minWin.count > current.count) {
             minWin = current
         }
@@ -93,6 +94,7 @@ const getLastBoardToWin = (boards, drawings) => {
     let maxWin = undefined
     for (const board of boards) {
         const current = completeBoard(board, drawings)
+        if (current == undefined) continue
         if (maxWin == undefined || maxWin.count < current.count) {
             maxWin = current
         }
