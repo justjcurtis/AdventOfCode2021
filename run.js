@@ -11,7 +11,6 @@ const day4 = require('./4/solution')
 const day5 = require('./5/solution')
 const day6 = require('./6/solution')
 
-console.log('-----------------------')
 console.log()
 console.log("-------- Day 1 --------")
 console.time('Time Taken')

@@ -4,6 +4,7 @@
     "jest": "^27.4.3"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "answers/": "node run.js; yarn test answers/"
   }
 }
