@@ -41,8 +41,6 @@ console.log('Part 2:', day4.getLastBoardToWin(day4Input.boards, day4Input.drawin
 console.timeEnd('Time Taken')
 console.log('-----------------------')
 console.log()
-console.log('-----------------------')
-console.log()
 console.log("-------- Day 5 --------")
 console.time('Time Taken')
 console.log('Part 1:', day5.solution(day5Input).straight) // 4826
