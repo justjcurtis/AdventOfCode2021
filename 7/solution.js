@@ -11,27 +11,25 @@ const fuelToPos = (crabs, i) => {
     return { linear, exp }
 }
 
-const ascendingCrabs = (a, b) => a - b
-const ascendingLinearFuel = (a, b) => a.fuel.linear - b.fuel.linear
-const ascendingExpFuel = (a, b) => a.fuel.exp - b.fuel.exp
+const ascendingLinearFuel = (a, b) => a.linear - b.linear
+const ascendingExpFuel = (a, b) => a.exp - b.exp
 
 const solution = crabs => {
-    crabs.sort(ascendingCrabs)
     const min = Math.min(...crabs)
     const max = Math.max(...crabs)
 
     const fuleCost = []
     for (let i = min; i <= max; i++) {
-        fuleCost.push({ i, fuel: fuelToPos(crabs, i) })
+        fuleCost.push(fuelToPos(crabs, i))
     }
 
     fuleCost.sort(ascendingLinearFuel)
-    const part1 = fuleCost[0].fuel.linear
+    const part1 = fuleCost[0].linear
 
     fuleCost.sort(ascendingExpFuel)
-    const part2 = fuleCost[0].fuel.exp
+    const part2 = fuleCost[0].exp
 
     return { part1, part2 }
 }
 
-module.exports = { ascendingCrabs, ascendingExpFuel, ascendingLinearFuel, fuelStepExp, fuelToPos, solution }
+module.exports = { ascendingExpFuel, ascendingLinearFuel, fuelStepExp, fuelToPos, solution }
