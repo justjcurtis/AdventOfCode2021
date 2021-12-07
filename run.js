@@ -4,12 +4,14 @@ const day3Input = require('./3/input')
 const day4Input = require('./4/input')
 const day5Input = require('./5/input')
 const day6Input = require('./6/input')
+const day7Input = require('./7/input')
 const day1 = require('./1/solution')
 const day2 = require('./2/solution')
 const day3 = require('./3/solution')
 const day4 = require('./4/solution')
 const day5 = require('./5/solution')
 const day6 = require('./6/solution')
+const day7 = require('./7/solution')
 
 console.log()
 console.log("-------- Day 1 --------")
@@ -42,8 +44,9 @@ console.log('-----------------------')
 console.log()
 console.log("-------- Day 5 --------")
 console.time('Time Taken')
-console.log('Part 1:', day5.solution(day5Input).straight) // 4826
-console.log('Part 2:', day5.solution(day5Input).all) // 16793
+const day5Answer = day5.solution(day5Input)
+console.log('Part 1:', day5Answer.straight) // 4826
+console.log('Part 2:', day5Answer.all) // 16793
 console.timeEnd('Time Taken')
 console.log('-----------------------')
 console.log()
@@ -51,5 +54,13 @@ console.log("-------- Day 6 --------")
 console.time('Time Taken')
 console.log('Part 1:', day6.solution(day6Input, 80)) // 386755
 console.log('Part 2:', day6.solution(day6Input, 256)) // 1732731810807
+console.timeEnd('Time Taken')
+console.log('-----------------------')
+console.log()
+console.log("-------- Day 7 --------")
+console.time('Time Taken')
+const day7Answer = day7.solution(day7Input)
+console.log('Part 1:', day7Answer.part1) // 328318
+console.log('Part 2:', day7Answer.part2) // 89791146
 console.timeEnd('Time Taken')
 console.log('-----------------------')
