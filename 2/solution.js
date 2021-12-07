@@ -44,7 +44,7 @@ const solution = (input, cmdHandler) => {
         d = D
         h = H
     }
-    return { h, d, t: h * d }
+    return h * d
 }
 
 module.exports = { part1Handler, part2Handler, solution }

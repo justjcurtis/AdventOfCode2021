@@ -25,11 +25,11 @@ describe('Check actual answers', () => {
 
     describe('Day 2', () => {
         test('Part 1', () => {
-            const result = day2.solution(day2Input, day2.part1Handler).t
+            const result = day2.solution(day2Input, day2.part1Handler)
             expect(result).toBe(1947824)
         })
         test('Part 2', () => {
-            const result = day2.solution(day2Input, day2.part2Handler).t
+            const result = day2.solution(day2Input, day2.part2Handler)
             expect(result).toBe(1813062561)
         })
     })

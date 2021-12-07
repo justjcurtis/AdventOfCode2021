@@ -11,33 +11,48 @@ const day4 = require('./4/solution')
 const day5 = require('./5/solution')
 const day6 = require('./6/solution')
 
-console.log("--- Day 1 ---")
+console.log('-----------------------')
+console.log()
+console.log("-------- Day 1 --------")
+console.time('Time Taken')
 console.log("Part 1:", day1.solution(day1Input)) // 1602
 console.log("Part 2:", day1.solution(day1.createSlidingWindow(day1Input))) // 1633
-console.log('-------------')
+console.timeEnd('Time Taken')
+console.log('-----------------------')
 console.log()
-console.log("--- Day 2 ---")
-console.log('Part 1:', day2.solution(day2Input, day2.part1Handler)) // .t 1947824
-console.log('Part 2:', day2.solution(day2Input, day2.part2Handler)) // .t 1813062561
-console.log('-------------')
+console.log("-------- Day 2 --------")
+console.time('Time Taken')
+console.log('Part 1:', day2.solution(day2Input, day2.part1Handler)) // 1947824
+console.log('Part 2:', day2.solution(day2Input, day2.part2Handler)) // 1813062561
+console.timeEnd('Time Taken')
+console.log('-----------------------')
 console.log()
-console.log("--- Day 3 ---")
+console.log("-------- Day 3 --------")
+console.time('Time Taken')
 console.log('Part 1:', day3.solution1(day3Input)) // 2498354
 console.log('Part 2:', day3.solution2(day3Input)) // 3277956
-console.log('-------------')
+console.timeEnd('Time Taken')
+console.log('-----------------------')
 console.log()
-console.log("--- Day 4 ---")
+console.log("-------- Day 4 --------")
+console.time('Time Taken')
 console.log('Part 1:', day4.getFirstBoardToWin(day4Input.boards, day4Input.drawings)) // 63552
 console.log('Part 2:', day4.getLastBoardToWin(day4Input.boards, day4Input.drawings)) // 9020
-console.log('-------------')
-console.log('-------------')
+console.timeEnd('Time Taken')
+console.log('-----------------------')
 console.log()
-console.log("--- Day 5 ---")
+console.log('-----------------------')
+console.log()
+console.log("-------- Day 5 --------")
+console.time('Time Taken')
 console.log('Part 1:', day5.solution(day5Input).straight) // 4826
 console.log('Part 2:', day5.solution(day5Input).all) // 16793
-console.log('-------------')
+console.timeEnd('Time Taken')
+console.log('-----------------------')
 console.log()
-console.log("--- Day 6 ---")
+console.log("-------- Day 6 --------")
+console.time('Time Taken')
 console.log('Part 1:', day6.solution(day6Input, 80)) // 386755
 console.log('Part 2:', day6.solution(day6Input, 256)) // 1732731810807
-console.log('-------------')
+console.timeEnd('Time Taken')
+console.log('-----------------------')

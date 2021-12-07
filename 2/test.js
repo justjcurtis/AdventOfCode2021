@@ -91,13 +91,13 @@ describe('Day 2', () => {
     })
 
     describe('solution', () => {
-        test('solution with part1handler should return {"d": 10, "h": 15, "t": 150}', () => {
+        test('solution with part1handler should return 150', () => {
             const result = solution(input, part1Handler)
-            expect(result).toStrictEqual({ "d": 10, "h": 15, "t": 150 })
+            expect(result).toBe(150)
         })
-        test('solution with part2handler should return {"d": 60, "h": 15, "t": 900}', () => {
+        test('solution with part2handler should return 900', () => {
             const result = solution(input, part2Handler)
-            expect(result).toStrictEqual({ "d": 60, "h": 15, "t": 900 })
+            expect(result).toBe(900)
         })
     })
 })
