@@ -1,15 +1,17 @@
-const day1Input = require('../1/input')
-const day2Input = require('../2/input')
-const day3Input = require('../3/input')
-const day4Input = require('../4/input')
-const day5Input = require('../5/input')
-const day6Input = require('../6/input')
-const day1 = require('../1/solution')
-const day2 = require('../2/solution')
-const day3 = require('../3/solution')
-const day4 = require('../4/solution')
-const day5 = require('../5/solution')
-const day6 = require('../6/solution')
+const day1Input = require('./1/input')
+const day2Input = require('./2/input')
+const day3Input = require('./3/input')
+const day4Input = require('./4/input')
+const day5Input = require('./5/input')
+const day6Input = require('./6/input')
+const day7Input = require('./7/input')
+const day1 = require('./1/solution')
+const day2 = require('./2/solution')
+const day3 = require('./3/solution')
+const day4 = require('./4/solution')
+const day5 = require('./5/solution')
+const day6 = require('./6/solution')
+const day7 = require('./7/solution')
 
 describe('Check actual answers', () => {
     describe('Day 1', () => {
@@ -57,12 +59,13 @@ describe('Check actual answers', () => {
     })
 
     describe('Day 5', () => {
+        const day5Answer = day5.solution(day5Input)
         test('Part 1', () => {
-            const result = day5.solution(day5Input).straight
+            const result = day5Answer.straight
             expect(result).toBe(4826)
         })
         test('Part 2', () => {
-            const result = day5.solution(day5Input).all
+            const result = day5Answer.all
             expect(result).toBe(16793)
         })
     })
@@ -75,6 +78,18 @@ describe('Check actual answers', () => {
         test('Part 2', () => {
             const result = day6.solution(day6Input, 256)
             expect(result).toBe(1732731810807)
+        })
+    })
+
+    describe('Day 7', () => {
+        const day7Answer = day7.solution(day7Input)
+        test('Part 1', () => {
+            const result = day7Answer.part1
+            expect(result).toBe(328318)
+        })
+        test('Part 2', () => {
+            const result = day7Answer.part2
+            expect(result).toBe(89791146)
         })
     })
 })
