@@ -5,6 +5,7 @@
   },
   "scripts": {
     "test": "jest",
-    "answers/": "node run.js; yarn test answers/"
+    "answers/": "node run.js; yarn test answers/",
+    "all": "yarn answers/;yarn test"
   }
 }
