@@ -137,3 +137,17 @@ const solution = input => {
     }
     return { part1: easyNumCount, part2: total }
 }
+
+module.exports = {
+    cancelSingles,
+    decodeSignal,
+    evalSig,
+    evalSignal,
+    filterOpts,
+    getKey,
+    handleSig,
+    missingChars,
+    parseLine,
+    replaceSignal,
+    solution
+}
