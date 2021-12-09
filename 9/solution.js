@@ -26,9 +26,11 @@ const getLowPoints = depths => {
             const val = depths[x][y]
             if (x == 0 || depths[x - 1][y] > val) {
                 if (x == w - 1 || depths[x + 1][y] > val) {
-                    const surrounding = getSurrounding(x, y, w, h, depths)
-                    const isLow = surrounding.filter(s => s.val < val).length == 0
-                    if (isLow) lows.push({ x, y, val })
+                    if (y == 0 || depths[x][y - 1] > val) {
+                        if (y == h - 1 || depths[x][y + 1] > val) {
+                            lows.push({ x, y, val })
+                        }
+                    }
                 }
             }
         }
