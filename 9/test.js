@@ -50,7 +50,6 @@ describe('Day 9', () => {
         }
         test.each(getBasinFromLowTestData)('given %p, should return %p', (low, expected) => {
             const result = getBasinFromLow(low, depths)
-            console.log()
             expect(Object.values(result)).toStrictEqual(expected)
         })
     })
