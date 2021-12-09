@@ -6,14 +6,13 @@ const parseInput = input => {
     return parsed
 }
 
-const getSurrounding = (x, y, w, h, depths) => {
-    const surrounding = [
-        { x: x - 1, y },
-        { x: x + 1, y },
-        { x, y: y - 1 },
-        { x, y: y + 1 }
+const getSurrounding = (x, y, w, h) => {
+    return [
+        { x: x - 1, y, val: -1 },
+        { x: x + 1, y, val: -1 },
+        { x, y: y - 1, val: -1 },
+        { x, y: y + 1, val: -1 }
     ].filter(p => (p.x >= 0 && p.x < w) && (p.y >= 0 && p.y < h))
-    return surrounding.map(p => ({ ...p, val: depths[p.x][p.y] }))
 }
 
 const getLowPoints = depths => {
@@ -46,23 +45,26 @@ const getTotalRisk = points => {
     return total + points.length
 }
 
-const getBasinFromLow = (low, depths, basin = {}) => {
+const getBasinFromLow = (low, depths, w, h, basin = {}) => {
     basin[`${low.x},${low.y}`] = low
-    const w = depths.length
-    const h = depths[0].length
-    const surrounding = getSurrounding(low.x, low.y, w, h, depths).filter(s => s.val < 9)
+    const surrounding = getSurrounding(low.x, low.y, w, h)
     for (const s of surrounding) {
         if (basin[`${s.x},${s.y}`] == undefined) {
-            basin = getBasinFromLow(s, depths, basin)
+            s.val = depths[s.x][s.y]
+            if (s.val < 9) {
+                basin = getBasinFromLow(s, depths, w, h, basin)
+            }
         }
     }
     return basin
 }
 
 const get3LargestBasins = (lows, depths) => {
+    const w = depths.length
+    const h = depths[0].length
     const basins = []
     for (const low of lows) {
-        basins.push(Object.values(getBasinFromLow(low, depths)))
+        basins.push(Object.values(getBasinFromLow(low, depths, w, h)))
     }
     basins.sort((a, b) => b.length - a.length)
     return basins.slice(0, 3)

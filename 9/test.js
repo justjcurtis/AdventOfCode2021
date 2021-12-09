@@ -13,15 +13,15 @@ describe('Day 9', () => {
 
     describe('getSurrounding', () => {
         const getSurroundingTestData = [
-            [0, 0, [{ x: 1, y: 0, val: 3 }, { x: 0, y: 1, val: 1 }]],
-            [2, 0, [{ x: 1, y: 0, val: 3 }, { x: 3, y: 0, val: 8 }, { x: 2, y: 1, val: 8 }]],
-            [4, 0, [{ x: 3, y: 0, val: 8 }, { x: 4, y: 1, val: 8 }]],
-            [0, 4, [{ x: 1, y: 4, val: 8 }, { x: 0, y: 3, val: 9 }, { x: 0, y: 5, val: 4 }]],
-            [2, 4, [{ x: 1, y: 4, val: 8 }, { x: 3, y: 4, val: 8 }, { x: 2, y: 3, val: 6 }, { x: 2, y: 5, val: 8 }]],
-            [4, 4, [{ x: 3, y: 4, val: 8 }, { x: 4, y: 3, val: 9 }, { x: 4, y: 5, val: 6 }]],
-            [0, 9, [{ x: 1, y: 9, val: 1 }, { x: 0, y: 8, val: 1 }]],
-            [2, 9, [{ x: 1, y: 9, val: 1 }, { x: 3, y: 9, val: 9 }, { x: 2, y: 8, val: 9 }]],
-            [4, 9, [{ x: 3, y: 9, val: 9 }, { x: 4, y: 8, val: 7 }]],
+            [0, 0, [{ x: 1, y: 0, val: -1 }, { x: 0, y: 1, val: -1 }]],
+            [2, 0, [{ x: 1, y: 0, val: -1 }, { x: 3, y: 0, val: -1 }, { x: 2, y: 1, val: -1 }]],
+            [4, 0, [{ x: 3, y: 0, val: -1 }, { x: 4, y: 1, val: -1 }]],
+            [0, 4, [{ x: 1, y: 4, val: -1 }, { x: 0, y: 3, val: -1 }, { x: 0, y: 5, val: -1 }]],
+            [2, 4, [{ x: 1, y: 4, val: -1 }, { x: 3, y: 4, val: -1 }, { x: 2, y: 3, val: -1 }, { x: 2, y: 5, val: -1 }]],
+            [4, 4, [{ x: 3, y: 4, val: -1 }, { x: 4, y: 3, val: -1 }, { x: 4, y: 5, val: -1 }]],
+            [0, 9, [{ x: 1, y: 9, val: -1 }, { x: 0, y: 8, val: -1 }]],
+            [2, 9, [{ x: 1, y: 9, val: -1 }, { x: 3, y: 9, val: -1 }, { x: 2, y: 8, val: -1 }]],
+            [4, 9, [{ x: 3, y: 9, val: -1 }, { x: 4, y: 8, val: -1 }]],
         ]
         test.each(getSurroundingTestData)('given x:%p, y:%p and w h for test depths should return %p', (x, y, expected) => {
             const result = getSurrounding(x, y, w, h, depths)
@@ -49,7 +49,7 @@ describe('Day 9', () => {
             getBasinFromLowTestData.push([lows[i], basins[i]])
         }
         test.each(getBasinFromLowTestData)('given %p, should return %p', (low, expected) => {
-            const result = getBasinFromLow(low, depths)
+            const result = getBasinFromLow(low, depths, w, h)
             expect(Object.values(result)).toStrictEqual(expected)
         })
     })
