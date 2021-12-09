@@ -72,3 +72,13 @@ const solution = input => {
     const basins = get3LargestBasins(lows, depths)
     return { part1: getTotalRisk(lows), part2: basins.reduce((acc, basin) => acc *= basin.length, 1) }
 }
+
+module.exports = {
+    parseInput,
+    getSurrounding,
+    getLowPoints,
+    getTotalRisk,
+    getBasinFromLow,
+    get3LargestBasins,
+    solution
+}
