@@ -11,7 +11,6 @@ describe('Day 11', () => {
         test('should ignore octos in flashmap', () => {
             const octos = steps[0].slice(0).map(r => r.map(v => v + 1))
             const result = flash({ x: 0, y: 2 }, octos, { '1,1': true })
-            console.log(result)
             expect(result).toStrictEqual(flashTestExpected[1])
         })
     })
