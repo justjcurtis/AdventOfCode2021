@@ -72,3 +72,5 @@ const solution = (input) => {
     }
     return { part1: flashCount, part2: i }
 }
+
+module.exports = { flash, getSurrounding, parseInput, solution, step }
