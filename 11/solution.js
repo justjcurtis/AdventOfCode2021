@@ -6,18 +6,18 @@ const parseInput = input => {
     return parsed
 }
 
-const getSurrounding = (x, y, w, h) => {
+const getSurrounding = (x, y) => {
     return [
-        { x: x - 1, y, val: -1 },
-        { x: x + 1, y, val: -1 },
-        { x, y: y - 1, val: -1 },
-        { x, y: y + 1, val: -1 },
+        { x: x - 1, y },
+        { x: x + 1, y },
+        { x, y: y - 1 },
+        { x, y: y + 1 },
 
-        { x: x - 1, y: y - 1, val: -1 },
-        { x: x + 1, y: y + 1, val: -1 },
-        { x: x + 1, y: y - 1, val: -1 },
-        { x: x - 1, y: y + 1, val: -1 }
-    ].filter(p => (p.x >= 0 && p.x < w) && (p.y >= 0 && p.y < h))
+        { x: x - 1, y: y - 1 },
+        { x: x + 1, y: y + 1 },
+        { x: x + 1, y: y - 1 },
+        { x: x - 1, y: y + 1 }
+    ].filter(p => (p.x >= 0 && p.x < 10) && (p.y >= 0 && p.y < 10))
 }
 
 
@@ -25,10 +25,8 @@ const flash = ({ x, y }, octos, flashmap) => {
     if (flashmap[`${x},${y}`] != undefined) return { octos, flashmap }
     octos[x][y] = 0
     flashmap[`${x},${y}`] = true
-    const w = octos.length
-    const h = octos[0].length
     const toFlash = []
-    const surrounding = getSurrounding(x, y, w, h)
+    const surrounding = getSurrounding(x, y)
     for (const s of surrounding) {
         if (flashmap[`${s.x},${s.y}`] == undefined) {
             octos[s.x][s.y]++;
@@ -61,28 +59,16 @@ const step = (octos, flashmap = {}) => {
     return { octos, flashCount: Object.keys(flashmap).length }
 }
 
-const stepN = (octos, n) => {
-    let flashCount = 0
-    for (let i = 0; i < n; i++) {
-        const result = step(octos.slice(0))
-        octos = result.octos
-        flashCount += result.flashCount
-
-    }
-    return { octos, flashCount }
-}
-
 const solution = (input) => {
     let octos = parseInput(input)
-    const w = octos.length
-    const h = octos[0].length
-    const post100 = stepN(JSON.parse(JSON.stringify(octos)), 100)
+    let flashCount = 0
     let i = 0
     while (true) {
-        const result = step(octos.slice(0))
+        const result = step(octos)
         octos = result.octos
+        if (i < 100) flashCount += result.flashCount
         i++
-        if (result.flashCount == w * h) break
+        if (result.flashCount == 100) break
     }
-    return { part1: post100.flashCount, part2: i }
+    return { part1: flashCount, part2: i }
 }
