@@ -8,6 +8,7 @@ const day7Input = require('../7/input')
 const day8Input = require('../8/input')
 const day9Input = require('../9/input')
 const day10Input = require('../10/input')
+const day11Input = require('../11/input')
 const day1 = require('../1/solution')
 const day2 = require('../2/solution')
 const day3 = require('../3/solution')
@@ -18,6 +19,7 @@ const day7 = require('../7/solution')
 const day8 = require('../8/solution')
 const day9 = require('../9/solution')
 const day10 = require('../10/solution')
+const day11 = require('../11/solution')
 
 describe('Check actual answers', () => {
     describe('Day 1', () => {
@@ -134,15 +136,16 @@ describe('Check actual answers', () => {
             expect(result).toBe(2412013412)
         })
     })
+
+    describe('Day 11', () => {
+        const day11Answer = day11.solution(day11Input)
+        test('Part 1', () => {
+            const result = day11Answer.part1
+            expect(result).toBe(1713)
+        })
+        test('Part 2', () => {
+            const result = day11Answer.part2
+            expect(result).toBe(502)
+        })
+    })
 })
-
-
-
-
-
-
-
-
-
-
-
