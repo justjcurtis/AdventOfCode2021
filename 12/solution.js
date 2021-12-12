@@ -47,3 +47,5 @@ const solution = input => {
     const part2 = getPaths(G, 2).length
     return { part1, part2 }
 }
+
+module.exports = { getGraph, countOccurrences, getPaths, solution }
