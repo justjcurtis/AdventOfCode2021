@@ -10,6 +10,7 @@ const day9Input = require('../9/input')
 const day10Input = require('../10/input')
 const day11Input = require('../11/input')
 const day12Input = require('../12/input')
+const day13Input = require('../13/input')
 const day1 = require('../1/solution')
 const day2 = require('../2/solution')
 const day3 = require('../3/solution')
@@ -22,6 +23,7 @@ const day9 = require('../9/solution')
 const day10 = require('../10/solution')
 const day11 = require('../11/solution')
 const day12 = require('../12/solution')
+const day13 = require('../13/solution')
 
 describe('Check actual answers', () => {
     describe('Day 1', () => {
@@ -160,6 +162,28 @@ describe('Check actual answers', () => {
         test('Part 2', () => {
             const result = day12Answer.part2
             expect(result).toBe(119760)
+        })
+    })
+
+    describe('Day 13', () => {
+        const day13Answer = day13.solution(day13Input)
+        test('Part 1', () => {
+            const result = day13Answer.part1
+            expect(result).toBe(689)
+        })
+        test('Part 2', () => {
+            const result = day13Answer.part2.split('\n')
+            console.log(result)
+            expect(result).toStrictEqual([
+                '',
+                '###..#....###...##....##..##..#....#..#',
+                '#..#.#....#..#.#..#....#.#..#.#....#..#',
+                '#..#.#....###..#.......#.#....#....#..#',
+                '###..#....#..#.#.......#.#.##.#....#..#',
+                '#.#..#....#..#.#..#.#..#.#..#.#....#..#',
+                '#..#.####.###...##...##...###.####..##.'
+            ]
+            )
         })
     })
 })
