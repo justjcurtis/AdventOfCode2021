@@ -88,3 +88,15 @@ const solution = input => {
     const part2 = '\n' + grid.map(r => r.join('')).join('\n')
     return { part1, part2 }
 }
+
+module.exports = {
+    parseDots,
+    parseFolds,
+    foldUp,
+    foldLeft,
+    fold,
+    getDotMap,
+    countDots,
+    renderDots,
+    solution
+}
