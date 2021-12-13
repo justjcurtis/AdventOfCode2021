@@ -69,7 +69,7 @@ const renderDots = dots => {
         grid.push([])
         for (let X = 0; X <= maxX; X++) {
             const dot = dotMap[`${X},${Y}`] != undefined
-            grid[Y].push(dot ? '#' : '.')
+            grid[Y].push(dot ? '⬜️' : '⬛️')
         }
     }
     return grid
