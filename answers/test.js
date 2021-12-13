@@ -173,7 +173,6 @@ describe('Check actual answers', () => {
         })
         test('Part 2', () => {
             const result = day13Answer.part2.split('\n')
-            console.log(result)
             expect(result).toStrictEqual([
                 '',
                 '⬜️⬜️⬜️⬛️⬛️⬜️⬛️⬛️⬛️⬛️⬜️⬜️⬜️⬛️⬛️⬛️⬜️⬜️⬛️⬛️⬛️⬛️⬜️⬜️⬛️⬛️⬜️⬜️⬛️⬛️⬜️⬛️⬛️⬛️⬛️⬜️⬛️⬛️⬜️',
