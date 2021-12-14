@@ -91,3 +91,13 @@ const solution = input => {
     const commonPost40 = getCommonElements(post40Pairs)
     return { part1: commonPost10.max - commonPost10.min, part2: commonPost40.max - commonPost40.min }
 }
+
+module.exports = {
+    getPolyPairs,
+    parseInsertions,
+    doInsert,
+    updatePolyPairs,
+    doInsertions,
+    getCommonElements,
+    solution
+}
