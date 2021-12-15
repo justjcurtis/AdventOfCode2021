@@ -1,13 +1,19 @@
 const { parseInput, getGraph, reconstructPath, getNode, getNeighbors, aStar, heuristic, totalRisk, getLargeVal, getLargeGrid, logWithColor, renderGrid, solution } = require('./solution')
-const { input, largeInput } = require('./testData')
+const { input, largeInput, grid, graph } = require('./testData')
 
-describe.skip('Day 15', () => {
+describe('Day 15', () => {
     describe('parseInput', () => {
-
+        test('should return 2d array of ints for input', () => {
+            const result = parseInput(input)
+            expect(result).toStrictEqual(grid)
+        })
     })
 
     describe('getGraph', () => {
-
+        test('should return graph for grid', () => {
+            const result = getGraph(grid)
+            expect(result).toStrictEqual(graph)
+        })
     })
 
     describe('reconstructPath', () => {
@@ -51,6 +57,9 @@ describe.skip('Day 15', () => {
     })
 
     describe('solution', () => {
-
+        test('should return 40 and 315 for test input', () => {
+            const result = solution(input)
+            expect(result).toStrictEqual({ part1: 40, part2: 315 })
+        })
     })
 })
