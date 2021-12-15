@@ -38,23 +38,30 @@ const getNeighbors = ({ i, j }, graph, large) => {
 }
 
 const aStar = (start, goal, h, graph) => {
-    const openSet = [start]
-    const openMap = {}
-    openMap[start.id] = true
-    const cameFrom = {}
-
     const gScore = {}
     gScore[start.id] = 0
 
     const fScore = {}
     fScore[start.id] = h(start, goal)
 
-    while (openSet.length > 0) {
-        let current = openSet[0]
+    const openSet = {}
+    openSet[fScore[start.id]] = [start]
+    const openMap = {}
+    let openCount = 1
+
+    openMap[start.id] = true
+
+    const cameFrom = {}
+
+    while (openCount > 0) {
+        const fScores = Object.keys(openSet)
+        let current = openSet[fScores[0]][0]
         if (current.id == goal.id) return reconstructPath(cameFrom, current)
 
-        openSet.splice(0, 1)
+        openSet[fScores[0]].splice(0, 1)
+        if (openSet[fScores[0]].length == 0) delete openSet[fScores[0]]
         delete openMap[current.id]
+        openCount--
         const neighbors = getNeighbors(current.pos, graph)
         for (const neighbor of neighbors) {
             const tentativeGScore = gScore[current.id] + neighbor.val * 10
@@ -63,18 +70,10 @@ const aStar = (start, goal, h, graph) => {
                 gScore[neighbor.id] = tentativeGScore
                 fScore[neighbor.id] = tentativeGScore + h(neighbor, goal)
                 if (openMap[neighbor.id] == undefined) {
+                    if (openSet[fScore[neighbor.id]] == undefined) openSet[fScore[neighbor.id]] = []
+                    openSet[fScore[neighbor.id]].push(neighbor)
                     openMap[neighbor.id] = true
-                    let added = false
-                    for (let i = 0; i < openSet.length; i++) {
-                        if (fScore[openSet[i].id] >= fScore[neighbor.id]) {
-                            openSet.splice(i, 0, neighbor)
-                            added = true
-                            break
-                        }
-                    }
-                    if (!added) {
-                        openSet.push(neighbor)
-                    }
+                    openCount++
                 }
             }
         }
@@ -82,10 +81,7 @@ const aStar = (start, goal, h, graph) => {
     return undefined
 }
 
-const heuristic = (node, goal) => {
-    const d = (goal.pos.i - node.pos.i) + (goal.pos.j - node.pos.j)
-    return d * 4
-}
+const heuristic = (node, goal) => (goal.pos.i - node.pos.i) + (goal.pos.j - node.pos.j)
 
 const totalRisk = path => path.reduce((acc, n) => acc + n.val, 0) - path[0].val
 
