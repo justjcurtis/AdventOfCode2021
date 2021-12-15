@@ -1,5 +1,5 @@
 const { parseInput, getGraph, reconstructPath, getNode, getNeighbors, aStar, heuristic, totalRisk, getLargeVal, getLargeGrid, solution } = require('./solution')
-const { input, largeInput, grid, graph } = require('./testData')
+const { input, largeInput, grid, graph, path, largePath } = require('./testData')
 
 describe('Day 15', () => {
     describe('parseInput', () => {
@@ -29,7 +29,19 @@ describe('Day 15', () => {
     })
 
     describe('aStar', () => {
-
+        test('should return expected path for input', () => {
+            const start = graph[0][0]
+            const goal = graph[graph.height - 1][graph.width - 1]
+            const result = aStar(start, goal, heuristic, graph)
+            expect(result).toStrictEqual(path)
+        })
+        test('should return expected path for largeInput', () => {
+            const largeGraph = getGraph(parseInput(largeInput))
+            const start = largeGraph[0][0]
+            const goal = largeGraph[largeGraph.height - 1][largeGraph.width - 1]
+            const result = aStar(start, goal, heuristic, largeGraph)
+            expect(result).toStrictEqual(largePath)
+        })
     })
 
     describe('heuristic', () => {
@@ -45,7 +57,10 @@ describe('Day 15', () => {
     })
 
     describe('getLargeGrid', () => {
-
+        test('should return expected large grid for test input', () => {
+            const result = getLargeGrid(grid, graph)
+            expect(result).toStrictEqual(parseInput(largeInput))
+        })
     })
 
     describe('solution', () => {
