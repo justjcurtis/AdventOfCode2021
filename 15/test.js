@@ -1,4 +1,4 @@
-const { parseInput, getGraph, reconstructPath, getNode, getNeighbors, aStar, heuristic, totalRisk, getLargeVal, getLargeGrid, logWithColor, renderGrid, solution } = require('./solution')
+const { parseInput, getGraph, reconstructPath, getNode, getNeighbors, aStar, heuristic, totalRisk, getLargeVal, getLargeGrid, solution } = require('./solution')
 const { input, largeInput, grid, graph } = require('./testData')
 
 describe('Day 15', () => {
@@ -45,14 +45,6 @@ describe('Day 15', () => {
     })
 
     describe('getLargeGrid', () => {
-
-    })
-
-    describe('logWithColor', () => {
-
-    })
-
-    describe('renderGrid', () => {
 
     })
 

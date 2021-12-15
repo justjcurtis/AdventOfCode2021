@@ -110,43 +110,6 @@ const getLargeGrid = (grid, graph) => {
     return large
 }
 
-const logWithColor = (string, highlights) => {
-    let logString = ''
-    let high = false
-    for (let i = 0; i < string.length; i++) {
-        if (highlights.includes(i)) {
-            if (!high) {
-                logString += '\x1b[7m'
-                high = true
-            }
-        } else {
-            if (high) {
-                logString += '\x1b[0m'
-                high = false
-            }
-        }
-        logString += string[i]
-    }
-    logString += '\x1b[0m'
-    console.log(logString)
-}
-
-
-const renderGrid = (grid, path) => {
-    const highlightMap = {}
-    for (const n of path) {
-        highlightMap[n.id] = true
-    }
-    for (let i = 0; i < grid.length; i++) {
-        let string = grid[i].join('')
-        const highlights = []
-        for (let j = 0; j < grid[i].length; j++) {
-            if (highlightMap[`${i},${j}`]) highlights.push(j)
-        }
-        logWithColor(string, highlights)
-    }
-}
-
 const solution = input => {
     const grid = parseInput(input)
     const graph = getGraph(grid)
@@ -175,7 +138,5 @@ module.exports = {
     totalRisk,
     getLargeVal,
     getLargeGrid,
-    logWithColor,
-    renderGrid,
     solution
 }
