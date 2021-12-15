@@ -164,4 +164,18 @@ const solution = input => {
     return { part1, part2 }
 }
 
-module.exports = { solution }
+module.exports = {
+    parseInput,
+    getGraph,
+    reconstructPath,
+    getNode,
+    getNeighbors,
+    aStar,
+    heuristic,
+    totalRisk,
+    getLargeVal,
+    getLargeGrid,
+    logWithColor,
+    renderGrid,
+    solution
+}
