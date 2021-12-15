@@ -38,21 +38,23 @@ const getNeighbors = ({ i, j }, graph, large) => {
 }
 
 const aStar = (start, goal, h, graph) => {
-    const openSet = {}
-    openSet[start.id] = start
+    const openSet = [start]
+    const openMap = {}
+    openMap[start.id] = true
     const cameFrom = {}
+
     const gScore = {}
     gScore[start.id] = 0
+
     const fScore = {}
     fScore[start.id] = h(start, goal)
 
-    while (Object.keys(openSet).length > 0) {
-        const oArr = Object.entries(openSet)
-        oArr.sort((a, b) => fScore[a[0]] - fScore[b[0]])
-        let current = openSet[oArr[0][0]]
+    while (openSet.length > 0) {
+        let current = openSet[0]
         if (current.id == goal.id) return reconstructPath(cameFrom, current)
 
-        delete openSet[current.id]
+        openSet.splice(0, 1)
+        delete openMap[current.id]
         const neighbors = getNeighbors(current.pos, graph)
         for (const neighbor of neighbors) {
             const tentativeGScore = gScore[current.id] + neighbor.val * 10
@@ -60,7 +62,20 @@ const aStar = (start, goal, h, graph) => {
                 cameFrom[neighbor.id] = current
                 gScore[neighbor.id] = tentativeGScore
                 fScore[neighbor.id] = tentativeGScore + h(neighbor, goal)
-                if (openSet[neighbor.id] == undefined) openSet[neighbor.id] = neighbor
+                if (openMap[neighbor.id] == undefined) {
+                    openMap[neighbor.id] = true
+                    let added = false
+                    for (let i = 0; i < openSet.length; i++) {
+                        if (fScore[openSet[i].id] >= fScore[neighbor.id]) {
+                            openSet.splice(i, 0, neighbor)
+                            added = true
+                            break
+                        }
+                    }
+                    if (!added) {
+                        openSet.push(neighbor)
+                    }
+                }
             }
         }
     }
@@ -153,5 +168,6 @@ const solution = input => {
     const largePath = aStar(start, largeGoal, heuristic, largeGraph)
     console.timeEnd('largeSearch')
     const part2 = totalRisk(largePath)
+
     return { part1, part2 }
 }
