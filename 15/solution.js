@@ -152,18 +152,16 @@ const solution = input => {
     const graph = getGraph(grid)
     const start = graph[0][0]
     const goal = graph[graph.height - 1][graph.width - 1]
-    console.time('smallSearch')
     const path = aStar(start, goal, heuristic, graph)
-    console.timeEnd('smallSearch')
     const part1 = totalRisk(path)
 
     const largeGrid = getLargeGrid(grid, graph)
     const largeGraph = getGraph(largeGrid)
     const largeGoal = largeGraph[largeGraph.height - 1][largeGraph.width - 1]
-    console.time('largeSearch')
     const largePath = aStar(start, largeGoal, heuristic, largeGraph)
-    console.timeEnd('largeSearch')
     const part2 = totalRisk(largePath)
 
     return { part1, part2 }
 }
+
+module.exports = { solution }
