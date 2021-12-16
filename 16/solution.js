@@ -47,7 +47,6 @@ const readLiteralValue = (hex, bin = '') => {
     let lpb = 0
     let valueBin = ''
     let eop = false
-    // if (bin.length > 0 && bin[0] == '0') eop = true
     let i = 0
     while (!eop) {
         bin += hb[hex[i]]
