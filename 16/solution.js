@@ -1,11 +1,11 @@
 const typeHandlers = {
-    0: (values) => values.reduce((acc, v) => acc + v, 0),// sum
-    1: (values) => values.reduce((acc, v) => acc * v, 1),// product
-    2: (values) => Math.min(...values),// min
-    3: (values) => Math.max(...values),// max
-    5: (values) => values[0] > values[1] ? 1 : 0,// >
-    6: (values) => values[0] < values[1] ? 1 : 0,// <
-    7: (values) => values[0] == values[1] ? 1 : 0,// ==
+    0: (values) => values.reduce((acc, v) => acc + v, 0), // sum
+    1: (values) => values.reduce((acc, v) => acc * v, 1), // product
+    2: (values) => Math.min(...values), // min
+    3: (values) => Math.max(...values), // max
+    5: (values) => values[0] > values[1] ? 1 : 0, // >
+    6: (values) => values[0] < values[1] ? 1 : 0, // <
+    7: (values) => values[0] == values[1] ? 1 : 0, // ==
 }
 
 const hb = {
