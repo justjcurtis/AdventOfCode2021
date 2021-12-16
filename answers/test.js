@@ -13,6 +13,7 @@ const day12Input = require('../12/input')
 const day13Input = require('../13/input')
 const day14Input = require('../14/input')
 const day15Input = require('../15/input')
+const day16Input = require('../16/input')
 const day1 = require('../1/solution')
 const day2 = require('../2/solution')
 const day3 = require('../3/solution')
@@ -28,6 +29,7 @@ const day12 = require('../12/solution')
 const day13 = require('../13/solution')
 const day14 = require('../14/solution')
 const day15 = require('../15/solution')
+const day16 = require('../16/solution')
 
 describe('Check actual answers', () => {
     describe('Day 1', () => {
@@ -210,6 +212,18 @@ describe('Check actual answers', () => {
         test('Part 2', () => {
             const result = day15Answer.part2
             expect(result).toBe(2874)
+        })
+    })
+
+    describe('Day 16', () => {
+        const day16Answer = day16.solution(day16Input)
+        test('Part 1', () => {
+            const result = day16Answer.part1
+            expect(result).toBe(847)
+        })
+        test('Part 2', () => {
+            const result = day16Answer.part2
+            expect(result).toBe(333794664059)
         })
     })
 })
