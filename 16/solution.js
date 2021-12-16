@@ -158,3 +158,5 @@ const solution = input => {
     const part2 = evaluatePacket(packet)
     return { part1, part2 }
 }
+
+module.exports = { solution }
