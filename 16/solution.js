@@ -72,10 +72,10 @@ const handleOperator0 = (hex, bin = '') => {
     const packets = []
     while (lpb < 15 + l) {
         const packet = readPacket(hex.slice(i), bin.slice(lpb))
-        packets.push({ obj: packet.obj, bin: packet.bin.slice(0, packet.next.lpb) })
         i += packet.next.hexUsed
         bin += packet.bin.slice(bin.slice(lpb).length)
         lpb += packet.next.lpb
+        packets.push(packet.obj)
     }
     return { packets, bin, hexUsed: i, lpb, l }
 }
@@ -91,15 +91,20 @@ const handleOperator1 = (hex, bin = '') => {
     const packets = []
     while (packets.length < l) {
         const packet = readPacket(hex.slice(i), bin.slice(lpb))
-        packets.push({ obj: packet.obj, bin: packet.bin.slice(0, packet.next.lpb) })
         i += packet.next.hexUsed
         bin += packet.bin.slice(bin.slice(lpb).length)
         lpb += packet.next.lpb
+        packets.push(packet.obj)
     }
     return { packets, bin, hexUsed: i, lpb, l }
 }
 
 const readPacket = (hex, bIn = '') => {
+    let top = false
+    if (bIn === true) {
+        bIn = ''
+        top = true
+    }
     let { obj, bin, hexUsed } = getHeader(hex, bIn)
     let next = {}
     if (obj.t == 4) {
@@ -130,30 +135,30 @@ const readPacket = (hex, bIn = '') => {
             bin += sub.bin.slice(bin.slice(7).length)
         }
     }
-    return { obj, bin, next }
+    return top ? obj : { obj, bin, next }
 }
 
 const getVersionSum = packet => {
     let tv = packet.v
     if (packet.t == 4) return tv
     for (const child of packet.packets) {
-        tv += getVersionSum(child.obj)
+        tv += getVersionSum(child)
     }
     return tv
 }
 
 const evaluatePacket = packet => {
     const childVals = []
-    for (const child of packet.obj.packets) {
-        if (child.obj.t != 4) childVals.push(evaluatePacket(child))
-        else childVals.push(child.obj.value)
+    for (const child of packet.packets) {
+        if (child.t != 4) childVals.push(evaluatePacket(child))
+        else childVals.push(child.value)
     }
-    return typeHandlers[packet.obj.t](childVals)
+    return typeHandlers[packet.t](childVals)
 }
 
 const solution = input => {
-    const packet = readPacket(input)
-    const part1 = getVersionSum(packet.obj)
+    const packet = readPacket(input, true)
+    const part1 = getVersionSum(packet)
     const part2 = evaluatePacket(packet)
     return { part1, part2 }
 }
