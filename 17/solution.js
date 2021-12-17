@@ -10,10 +10,10 @@ const simX = (v, min, max) => {
     let x = 0
     let i = 0
     while (true) {
-        if ((x < min && v <= 0) || x > max) return { i: -1 }
         if (x >= min && x <= max) return { i, x }
+        if (v <= 0 || x > max) return { i: -1 }
         x += v
-        v--
+        v += v == 0 ? 0 : v < 0 ? 1 : -1
         i++
     }
 }
@@ -70,7 +70,10 @@ const simXY = (xV, yV, target) => {
                 return true
             }
         }
-        if ((y < target.y.min && yV < 0) || ((x < target.x.min && xV <= 0) || x > target.x.max)) return false
+        if ((y < target.y.min && yV < 0) ||
+            ((x < target.x.min && xV <= 0) || x > target.x.max)
+        ) return false
+
         y += yV
         x += xV
         yV--
