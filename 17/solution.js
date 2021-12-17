@@ -100,3 +100,5 @@ const solution = input => {
 
     return { part1: maxY, part2: distinctXY.length }
 }
+
+module.exports = { solution }

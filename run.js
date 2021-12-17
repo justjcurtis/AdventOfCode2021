@@ -122,3 +122,11 @@ console.log('Part 1:', day16Answer.part1) // 847
 console.log('Part 2:', day16Answer.part2) // 333794664059
 console.timeEnd('Time Taken')
 console.log('-----------------------')
+console.log()
+console.log("-------- Day 17 --------")
+console.time('Time Taken')
+const day17Answer = day[17].methods.solution(day[17].input)
+console.log('Part 1:', day17Answer.part1) // 13203
+console.log('Part 2:', day17Answer.part2) // 5644
+console.timeEnd('Time Taken')
+console.log('-----------------------')
