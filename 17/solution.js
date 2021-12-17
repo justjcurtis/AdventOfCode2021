@@ -7,6 +7,7 @@ const parseTarget = input => {
 }
 
 const simX = (v, min, max) => {
+    if (min < 0 || max < 0) throw ('not implemented for negative x targets')
     let x = 0
     let i = 0
     while (true) {
