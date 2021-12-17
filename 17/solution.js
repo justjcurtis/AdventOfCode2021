@@ -3,10 +3,7 @@ const parseTarget = input => {
     const [a, b] = data.split(', ')
     const X = a.slice(2).split('..').map(v => parseInt(v))
     const Y = b.slice(2).split('..').map(v => parseInt(v))
-    const t = { x: { min: X[0], max: X[1] }, y: { min: Y[0], max: Y[1] } }
-    t.width = t.x.max - t.x.min
-    t.height = t.y.max - t.y.min
-    return t
+    return { x: { min: X[0], max: X[1] }, y: { min: Y[0], max: Y[1] } }
 }
 
 const simX = (v, min, max) => {
