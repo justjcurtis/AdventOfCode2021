@@ -130,3 +130,11 @@ console.log('Part 1:', day17Answer.part1) // 13203
 console.log('Part 2:', day17Answer.part2) // 5644
 console.timeEnd('Time Taken')
 console.log('-----------------------')
+console.log()
+console.log("-------- Day 18 --------")
+console.time('Time Taken')
+const day18Answer = day[18].methods.solution(day[18].input)
+console.log('Part 1:', day18Answer.part1) // 3816
+console.log('Part 2:', day18Answer.part2) // 4819
+console.timeEnd('Time Taken')
+console.log('-----------------------')

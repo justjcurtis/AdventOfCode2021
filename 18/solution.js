@@ -39,3 +39,5 @@ const solution = input => {
     }
     return { part1, part2: Math.max(...mags) }
 }
+
+module.exports = { solution }
