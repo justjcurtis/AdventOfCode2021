@@ -14,6 +14,17 @@ const createTree = (arr, depth = 0) => {
     return tree;
 };
 
+const getAllOpts = len => {
+    const opts = []
+    for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len; j++) {
+            if (i == j) continue
+            opts.push([i, j])
+        }
+    }
+    return opts
+}
+
 const solution = input => {
     let tree = undefined
     let a = input[0]
@@ -24,7 +35,13 @@ const solution = input => {
         a = tree.collapse()
     }
     const part1 = tree.magnitude()
-    return { part1 }
+    const allOpts = getAllOpts(input.length)
+    const mags = []
+    for (const opt of allOpts) {
+        const mag = createTree([input[opt[0]], input[opt[1]]]).reduce().magnitude()
+        mags.push(mag)
+    }
+    return { part1, part2: Math.max(...mags) }
 }
 
 console.log(solution(input))
