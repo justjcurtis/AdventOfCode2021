@@ -207,4 +207,16 @@ describe('Check actual answers', () => {
             expect(result).toBe(5644)
         })
     })
+
+    describe('Day 18', () => {
+        const day18Answer = day[18].methods.solution(day[18].input)
+        test('Part 1', () => {
+            const result = day18Answer.part1
+            expect(result).toBe(3816)
+        })
+        test('Part 2', () => {
+            const result = day18Answer.part2
+            expect(result).toBe(4819)
+        })
+    })
 })
