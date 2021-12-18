@@ -1,8 +1,4 @@
-const input = require('./input')
-const test = require('./testData')
 const SnailNode = require('./snailNode')
-
-const sum = (a, b) => [a, b]
 
 const createTree = (arr, depth = 0) => {
     const value = !isNaN(arr) ? arr : undefined
@@ -30,7 +26,7 @@ const solution = input => {
     let a = input[0]
     for (let i = 1; i < input.length; i++) {
         let b = input[i]
-        tree = createTree(sum(a, b))
+        tree = createTree([a, b])
         tree.reduce()
         a = tree.collapse()
     }
@@ -43,5 +39,3 @@ const solution = input => {
     }
     return { part1, part2: Math.max(...mags) }
 }
-
-console.log(solution(input))
