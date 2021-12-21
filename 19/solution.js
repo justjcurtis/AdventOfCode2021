@@ -1,5 +1,3 @@
-const input = require('./input')
-
 const parseInput = input => {
     const scannerReport = []
     for (const line of input) {
@@ -218,8 +216,4 @@ const solution = input => {
     return { part1, part2: max }
 }
 
-const { input: test, all } = require('./testData')
-
-console.time('a')
-console.log(solution(input))
-console.timeEnd('a')
+module.exports = { solution }
