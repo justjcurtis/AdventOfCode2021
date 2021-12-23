@@ -166,7 +166,7 @@ console.log()
 console.log("-------- Day 22 --------")
 console.time('Time Taken')
 const day22Answer = day[22].methods.solution(day[22].input)
-console.log('Part 1:', day22Answer.part1) // 752247
-console.log('Part 2:', day22Answer.part2) // 221109915584112
+console.log('Part 1:', day22Answer.part1) // 623748
+console.log('Part 2:', day22Answer.part2) // 1227345351869476
 console.timeEnd('Time Taken')
 console.log('-----------------------')
