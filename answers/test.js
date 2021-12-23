@@ -231,4 +231,28 @@ describe('Check actual answers', () => {
             expect(result).toBe(13327)
         })
     })
+
+    describe('Day 20', () => {
+        const day20Answer = day[20].methods.solution(day[20].input)
+        test('Part 1', () => {
+            const result = day20Answer.part1
+            expect(result).toBe(5203)
+        })
+        test('Part 2', () => {
+            const result = day20Answer.part2
+            expect(result).toBe(18806)
+        })
+    })
+
+    describe('Day 21', () => {
+        const day21Answer = day[21].methods.solution(day[21].input)
+        test('Part 1', () => {
+            const result = day21Answer.part1
+            expect(result).toBe(752247)
+        })
+        test('Part 2', () => {
+            const result = day21Answer.part2
+            expect(result).toBe(221109915584112)
+        })
+    })
 })
