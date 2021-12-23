@@ -75,3 +75,5 @@ const solution = input => {
     const qResult = playQuantum(gamestate)
     return { part1, part2: Math.max(...qResult) }
 }
+
+module.exports = { solution }
