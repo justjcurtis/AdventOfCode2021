@@ -103,4 +103,9 @@ module.exports = {
         methods: require('./21/solution'),
         input: require('./21/input')
     },
+
+    22: {
+        methods: require('./22/solution'),
+        input: require('./22/input')
+    },
 }

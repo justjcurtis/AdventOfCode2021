@@ -69,4 +69,4 @@ const solution = input => {
     return { part1, part2 }
 }
 
-module.export = { solution }
+module.exports = { solution }
