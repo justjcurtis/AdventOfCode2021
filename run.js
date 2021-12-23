@@ -158,7 +158,7 @@ console.log()
 console.log("-------- Day 21 --------")
 console.time('Time Taken')
 const day21Answer = day[21].methods.solution(day[21].input)
-console.log('Part 1:', day21Answer.part1) // 5213
-console.log('Part 2:', day21Answer.part2) // 18806
+console.log('Part 1:', day21Answer.part1) // 752247
+console.log('Part 2:', day21Answer.part2) // 221109915584112
 console.timeEnd('Time Taken')
 console.log('-----------------------')
