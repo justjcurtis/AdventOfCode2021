@@ -1,6 +1,3 @@
-const input = require('./input')
-const test = require('./testData')
-
 const parsePixels = pixels => parseInt(pixels.map(row => row.join('')).join('').split('').map(v => v == '.' ? '0' : '1').join(''), 2)
 
 const getPixelArray = (image, x, y, oob) => {
@@ -67,4 +64,4 @@ const solution = input => {
     return { part1, part2 }
 }
 
-console.log(solution(input))
+module.exports = { solution }

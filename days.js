@@ -93,4 +93,9 @@ module.exports = {
         methods: require('./19/solution'),
         input: require('./19/input')
     },
+
+    20: {
+        methods: require('./20/solution'),
+        input: require('./20/input')
+    },
 }
