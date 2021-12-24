@@ -17,7 +17,6 @@ const input = [
     'add y 12',
     'mul y x',
     'add z y',
-
     'inp w',
     'mul x 0',
     'add x z',
