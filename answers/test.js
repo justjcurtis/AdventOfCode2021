@@ -267,4 +267,36 @@ describe('Check actual answers', () => {
             expect(result).toBe(1227345351869476)
         })
     })
+
+    describe('Day 23', () => {
+        const day23Answer = day[23].methods.solution(day[23].input)
+        test('Part 1', () => {
+            const result = day23Answer.part1
+            expect(result).toBe(16300)
+        })
+        test('Part 2', () => {
+            const result = day23Answer.part2
+            expect(result).toBe(48676)
+        })
+    })
+
+    describe('Day 24', () => {
+        const day24Answer = day[24].methods.solution(day[24].input)
+        test('Part 1', () => {
+            const result = day24Answer.part1
+            expect(result).toBe(12996997829399)
+        })
+        test('Part 2', () => {
+            const result = day24Answer.part2
+            expect(result).toBe(11841231117189)
+        })
+    })
+
+    describe('Day 25', () => {
+        const day25Answer = day[25].methods.solution(day[25].input)
+        test('Part 1', () => {
+            const result = day25Answer.part1
+            expect(result).toBe(300)
+        })
+    })
 })
