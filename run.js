@@ -170,3 +170,26 @@ console.log('Part 1:', day22Answer.part1) // 623748
 console.log('Part 2:', day22Answer.part2) // 1227345351869476
 console.timeEnd('Time Taken')
 console.log('-----------------------')
+console.log()
+console.log("-------- Day 23 --------")
+console.time('Time Taken')
+const day23Answer = day[23].methods.solution(day[23].input)
+console.log('Part 1:', day23Answer.part1) // 16300
+console.log('Part 2:', day23Answer.part2) // 48676
+console.timeEnd('Time Taken')
+console.log('-----------------------')
+console.log()
+console.log("-------- Day 24 --------")
+console.time('Time Taken')
+const day24Answer = day[24].methods.solution(day[24].input)
+console.log('Part 1:', day24Answer.part1) // 12996997829399
+console.log('Part 2:', day24Answer.part2) // 11841231117189
+console.timeEnd('Time Taken')
+console.log('-----------------------')
+console.log()
+console.log("-------- Day 25 --------")
+console.time('Time Taken')
+const day25Answer = day[25].methods.solution(day[25].input)
+console.log('Part 1:', day25Answer.part1) // 300
+console.timeEnd('Time Taken')
+console.log('-----------------------')

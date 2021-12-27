@@ -1,6 +1,3 @@
-const input = require('./input')
-const test = require('./testData')
-
 const parseInput = input => input.map(line => line.split(''))
 
 const tick = grid => {
@@ -62,4 +59,4 @@ const solution = input => {
     return { part1 }
 }
 
-console.log(solution(input))
+module.exports = { solution }

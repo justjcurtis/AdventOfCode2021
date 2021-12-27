@@ -37,3 +37,5 @@ const solution = input => {
     const part2 = getModelNumber(input, true)
     return { part1, part2 }
 }
+
+module.exports = { solution }

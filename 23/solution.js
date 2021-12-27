@@ -116,5 +116,4 @@ const solution = input => {
     return { part1, part2 }
 }
 
-const input = require('./input')
-console.log(solution(input))
+module.exports = { solution }
