@@ -1,3 +1,5 @@
+const Heap = require('../util/Heap')
+
 const parseInput = input => input.map(r => r.split('').map(v => parseInt(v)))
 
 const getGraph = grid => {
@@ -44,24 +46,19 @@ const aStar = (start, goal, h, graph) => {
     const fScore = {}
     fScore[start.id] = h(start, goal)
 
-    const openSet = {}
-    openSet[fScore[start.id]] = [start]
-    const openMap = {}
-    let openCount = 1
+    const openSet = new Heap((a, b) => a[0] < b[0])
+    openSet.push([fScore[start.id], start])
 
+    const openMap = {}
     openMap[start.id] = true
 
     const cameFrom = {}
 
-    while (openCount > 0) {
-        const fScores = Object.keys(openSet)
-        let current = openSet[fScores[0]][0]
+    while (openSet.length > 0) {
+        let current = openSet.pop()[1]
         if (current.id == goal.id) return reconstructPath(cameFrom, current)
 
-        openSet[fScores[0]].splice(0, 1)
-        if (openSet[fScores[0]].length == 0) delete openSet[fScores[0]]
         delete openMap[current.id]
-        openCount--
         const neighbors = getNeighbors(current.pos, graph)
         for (const neighbor of neighbors) {
             const tentativeGScore = gScore[current.id] + neighbor.val * 10
@@ -70,10 +67,8 @@ const aStar = (start, goal, h, graph) => {
                 gScore[neighbor.id] = tentativeGScore
                 fScore[neighbor.id] = tentativeGScore + h(neighbor, goal)
                 if (openMap[neighbor.id] == undefined) {
-                    if (openSet[fScore[neighbor.id]] == undefined) openSet[fScore[neighbor.id]] = []
-                    openSet[fScore[neighbor.id]].push(neighbor)
+                    openSet.push([fScore[neighbor.id], neighbor])
                     openMap[neighbor.id] = true
-                    openCount++
                 }
             }
         }
