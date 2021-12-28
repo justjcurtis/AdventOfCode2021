@@ -30,8 +30,7 @@ const buildBeaconMap = scanner => {
         for (let j = i + 1; j < scanner.beacons.length; j++) {
             if (i == j) continue
             const fp = fingerprint(scanner.beacons[i], scanner.beacons[j])
-            if (beaconMap[fp] == undefined) beaconMap[fp] = []
-            beaconMap[fp].push([i, j])
+            beaconMap[fp] = [i, j]
         }
     }
     return beaconMap
@@ -74,17 +73,20 @@ const permutePoint = ({ x, y, z }, i) => {
 }
 
 const findMatches = (known, checking) => {
-    const knownFps = Object.keys(known.fingerprints)
+    const matches = []
     const checkingFps = Object.keys(checking.fingerprints)
-    const both = [...knownFps, ...checkingFps]
-    const matches = both.filter((fp, i) => both.indexOf(fp) == i && checkingFps.includes(fp) && knownFps.includes(fp))
     const indexMap = {}
-    for (const fp of matches) {
-        const [a, b] = checking.fingerprints[fp][0]
-        const [c, d] = known.fingerprints[fp][0]
-        indexMap[a] = c
-        indexMap[b] = d
+    for (let i = 0; i < checkingFps.length; i++) {
+        const fp = checkingFps[i]
+        if (known.fingerprints[fp] != undefined) {
+            matches.push(fp)
+            const [a, b] = checking.fingerprints[fp]
+            const [c, d] = known.fingerprints[fp]
+            indexMap[a] = c
+            indexMap[b] = d
+        }
     }
+    matches.reverse()
     return { matches, indexMap }
 }
 
@@ -93,18 +95,19 @@ const vEqual = (a, b) => a[0] == b[0] && a[1] == b[1] && a[2] == b[2]
 const findRotationAndDistMapping = (known, unknown, matches) => {
     let rotationIndex = -1
     let distMapping = undefined
-    for (const mfp of matches) {
-        const [ki, kj] = known.fingerprints[mfp][0]
-        const [ui, uj] = unknown.fingerprints[mfp][0]
+    for (let m = 0; m < matches.length; m++) {
+        const mfp = matches[m]
+        const [ki, kj] = known.fingerprints[mfp]
+        const [ui, uj] = unknown.fingerprints[mfp]
         const [ka, kb] = [known.beacons[ki], known.beacons[kj]]
         const [ua, ub] = [unknown.beacons[ui], unknown.beacons[uj]]
 
+        const kd = vSub(ka, kb)
         for (let i = 0; i < 24; i++) {
             const pua = permutePoint(ua, i)
             const pub = permutePoint(ub, i)
-            const da = vSub(ka, pua)
-            const db = vSub(kb, pub)
-            if (vEqual(da, db)) {
+            const pud = vSub(pua, pub)
+            if (vEqual(kd, pud)) {
                 rotationIndex = i
                 const [x, y, z] = vSub(ka, pua)
                 distMapping = { x, y, z }
@@ -133,7 +136,7 @@ const getNewKnown = (unknown, matches, radm, knownBeaconsLength, indexMap) => {
     const newFingerprints = {}
     for (const fp of fingerprints) {
         if (matchMap[fp]) continue
-        const [ai, bi] = unknown.fingerprints[fp][0]
+        const [ai, bi] = unknown.fingerprints[fp]
         let newAi = -1
         let newBi = -1
         if (knownNewBeacons[ai] == undefined) {
@@ -162,9 +165,7 @@ const getNewKnown = (unknown, matches, radm, knownBeaconsLength, indexMap) => {
         } else {
             newBi = knownNewBeacons[bi]
         }
-        newFingerprints[fp] = [
-            [newAi, newBi]
-        ]
+        newFingerprints[fp] = [newAi, newBi]
     }
     return { newBeacons, newFingerprints }
 }
@@ -173,25 +174,19 @@ const getAbsolute = scannerReport => {
     const known = scannerReport[0]
     const unknown = scannerReport.slice(1)
     const scannerLocations = { 0: { x: 0, y: 0, z: 0 } }
-    let prevLength = unknown.length
     while (unknown.length > 0) {
         for (let i = 0; i < unknown.length; i++) {
             const { matches, indexMap } = findMatches(known, unknown[i])
             if (matches.length >= 66) {
                 const radm = findRotationAndDistMapping(known, unknown[i], matches)
-                if (radm == null) break
                 const newKnown = getNewKnown(unknown[i], matches, radm, known.beacons.length, indexMap)
                 known.beacons = [...known.beacons, ...newKnown.newBeacons]
-                known.fingerprints = {...known.fingerprints, ...newKnown.newFingerprints }
+                known.fingerprints = { ...known.fingerprints, ...newKnown.newFingerprints }
                 scannerLocations[unknown[i].id] = radm.distMapping
                 unknown.splice(i, 1)
                 break
             }
         }
-        if (prevLength == unknown.length) {
-            return null
-        }
-        prevLength = unknown.length
     }
     return { beacons: known.beacons, scannerLocations }
 }
