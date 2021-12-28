@@ -1,51 +1,16 @@
-const MinHeap = {
-    siftDown(h, i = 0, v = h[i]) {
-        if (i < h.length) {
-            let k = v[0]
-            while (1) {
-                let j = i * 2 + 1
-                if (j + 1 < h.length && h[j][0] > h[j + 1][0]) j++;
-                if (j >= h.length || k <= h[j][0]) break
-                h[i] = h[j]
-                i = j
-            }
-            h[i] = v
-        }
-    },
-    pop(h) {
-        return this.exchange(h, h.pop())
-    },
-    exchange(h, v) {
-        if (!h.length) return v
-        let w = h[0]
-        this.siftDown(h, 0, v)
-        return w
-    },
-    push(h, v) {
-        let k = v[0],
-            i = h.length,
-            j
-        while ((j = (i - 1) >> 1) >= 0 && k < h[j][0]) {
-            h[i] = h[j]
-            i = j
-        }
-        h[i] = v
-        return h
-    }
-}
-
+const Heap = require('../util/Heap')
 const chars = ['A', 'B', 'C', 'D']
 const costMap = [1, 10, 100, 1000]
 const roomMap = [2, 4, 6, 8]
 
 const searchGrid = lines => {
-    const queue = [
+    const queue = Heap.FromArray([
         [0, lines.slice(1, -1).map(row => row.split('').slice(1, -1))]
-    ]
+    ], (a, b) => a[0] < b[0])
 
     const visited = new Map()
     while (queue.length) {
-        const [cost, grid] = MinHeap.pop(queue)
+        const [cost, grid] = queue.pop()
         if (roomMap.every((x, t) => grid.slice(1).every(row => row[x] === chars[t])))
             return cost
 
@@ -99,7 +64,7 @@ const searchGrid = lines => {
             .filter(([key, new_cost]) => !visited.has(key) || new_cost < visited.get(key))
             .forEach(([key, new_cost, state]) => {
                 visited.set(key, new_cost)
-                MinHeap.push(queue, [new_cost, state])
+                queue.push([new_cost, state])
             })
     }
 }
