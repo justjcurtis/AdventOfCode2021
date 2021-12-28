@@ -3,7 +3,8 @@ const parseInput = input => input.map(line => line.split(''))
 const tick = grid => {
     const w = grid[0].length
     const h = grid.length
-        // east
+
+    // east
     const eastTick = grid.map(r => r.slice(0))
     for (let j = 0; j < h; j++) {
         for (let i = 0; i < w - 1; i++) {
@@ -39,16 +40,13 @@ const tick = grid => {
 
 const gridHash = grid => grid.map(line => line.join('')).join('')
 
-const stepsToStop = grid => {
-    let a = grid.map(r => r.slice(0))
+const stepsToStop = a => {
     let steps = 1
     while (true) {
-        let b = tick(a.map(r => r.slice(0)))
-        const aHash = gridHash(a)
-        const bHash = gridHash(b)
-        if (aHash == bHash) break
+        let b = tick(a)
+        if (gridHash(a) == gridHash(b)) break
         steps++
-        a = b.map(r => r.slice(0))
+        a = b
     }
     return steps
 }
