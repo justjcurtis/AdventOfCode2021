@@ -28,11 +28,6 @@ const play = ({ p1, p2, prev }) => {
     }
     return { p1, p2, prev }
 }
-const move = (p, r) => {
-    const pos = (((p.pos - 1) + r) % 10) + 1
-    const score = pos + p.score
-    return { pos, score }
-}
 
 const qDie = [
     { roll: 3, times: 1 },
@@ -44,25 +39,23 @@ const qDie = [
     { roll: 9, times: 1 }
 ]
 
-const playQuantum = ({ p1, p2 }, p1Turn = true, roll = -1) => {
-    let newP1 = { score: p1.score, pos: p1.pos }
-    let newP2 = { score: p2.score, pos: p2.pos }
-    const wins = [0, 0]
-    if (roll > 0) {
-        if (p1Turn) {
-            newP2 = move(newP2, roll)
-            if (newP2.score >= 21) return [0, 1]
-        } else {
-            newP1 = move(newP1, roll)
-            if (newP1.score >= 21) return [1, 0]
-        }
+const playQuantum = ({ p1, p2 }, turn = 1) => {
+    if (p1.score >= 21) return 1;
+    if (p2.score >= 21) return 0;
+
+    const current = turn ? p1 : p2
+    let sum = 0
+    for (let q = 0; q < 7; q++) {
+        const outcome = qDie[q]
+        const prevPos = current.pos;
+        const prevScore = current.score;
+        current.pos = ((current.pos - 1 + outcome.roll) % 10) + 1;
+        current.score += current.pos;
+        sum += outcome.times * playQuantum({ p1, p2 }, !turn)
+        current.pos = prevPos
+        current.score = prevScore
     }
-    for (const q of qDie) {
-        const newWins = playQuantum({ p1: {...newP1 }, p2: {...newP2 } }, !p1Turn, q.roll)
-        wins[0] += newWins[0] * q.times
-        wins[1] += newWins[1] * q.times
-    }
-    return wins
+    return sum
 }
 
 const solution = input => {
@@ -70,10 +63,10 @@ const solution = input => {
     const result = play(JSON.parse(JSON.stringify(gamestate)))
     const part1 = result.p1.score > result.p2.score ?
         result.p2.score * (result.p1.rollCount + result.p2.rollCount) :
-        result.p1.score * (result.p1.rollCount + result.p2.rollCount)
+        result.p1.score * (result.p1.rollCount + result.p2.rollCount);
+    const part2 = playQuantum(gamestate)
 
-    const qResult = playQuantum(gamestate)
-    return { part1, part2: Math.max(...qResult) }
+    return { part1, part2 }
 }
 
 module.exports = { solution }
