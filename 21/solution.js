@@ -35,7 +35,7 @@ const qDie = [
     { roll: 9, times: 1 }
 ]
 
-const playQuantum = ({ p1, p2 }, turn = 1) => {
+const playQuantum = (p1, p2, turn = true) => {
     if (p1.score >= 21) return 1;
     if (p2.score >= 21) return 0;
 
@@ -47,7 +47,7 @@ const playQuantum = ({ p1, p2 }, turn = 1) => {
         const prevScore = current.score;
         current.pos = ((current.pos - 1 + outcome.roll) % 10) + 1;
         current.score += current.pos;
-        sum += outcome.times * playQuantum({ p1, p2 }, !turn)
+        sum += outcome.times * playQuantum(p1, p2, !turn)
         current.pos = prevPos
         current.score = prevScore
     }
@@ -60,7 +60,7 @@ const solution = input => {
     const part1 = result.p1.score > result.p2.score ?
         result.p2.score * (result.p1.rollCount + result.p2.rollCount) :
         result.p1.score * (result.p1.rollCount + result.p2.rollCount);
-    const part2 = playQuantum(gamestate)
+    const part2 = playQuantum(gamestate.p1, gamestate.p2)
 
     return { part1, part2 }
 }
