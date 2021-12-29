@@ -12,18 +12,14 @@ const playerMove = (p, prev) => {
     p.pos = (((p.pos - 1) + (a + b + c)) % 10) + 1
     p.score += p.pos
     p.rollCount += 3
-    return { p, prev }
+    return prev
 }
 
 const play = ({ p1, p2, prev }) => {
     while (true) {
-        const p1Move = playerMove(p1, prev)
-        p1 = p1Move.p
-        prev = p1Move.prev
+        prev = playerMove(p1, prev)
         if (p1.score >= 1000) break
-        const p2Move = playerMove(p2, prev)
-        p2 = p2Move.p
-        prev = p2Move.prev
+        prev = playerMove(p2, prev)
         if (p2.score >= 1000) break
     }
     return { p1, p2, prev }
