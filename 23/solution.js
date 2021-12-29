@@ -11,40 +11,63 @@ const searchGrid = lines => {
     const visited = new Map()
     while (queue.length) {
         const [cost, grid] = queue.pop()
-        if (roomMap.every((x, t) => grid.slice(1).every(row => row[x] === chars[t])))
+        let rr = grid.slice(1)
+        if (roomMap.every((x, t) => rr.every(row => row[x] === chars[t])))
             return cost
+        rr = null
 
         let done = false
         let hallwayItemsCost = 0
         while (!done) {
-            const tempCost = grid[0]
-                .map((c, x) => [chars.indexOf(c), x])
-                .filter(([t]) => t >= 0)
-                .filter(([t]) => grid.every((row, i) => i == 0 || row[roomMap[t]] === chars[t] || row[roomMap[t]] === '.'))
-                .filter(([t, x]) => grid[0].slice(1 + Math.min(x, roomMap[t]), Math.max(x, roomMap[t])).every(c => c === '.'))
-                .map(([t, x]) => {
-                    const dx = Math.abs(x - roomMap[t])
-                    const dy = grid.filter((row, i) => i > 0 && row[roomMap[t]] === '.').length
+            let tempCost = 0
+            gridLoop:
+                for (let x = 0; x < grid[0].length; x++) {
+                    const c = chars.indexOf(grid[0][x])
+                    if (c < 0) continue
+                    const room = roomMap[c]
+                    const roomRows = grid.slice(1)
+                    for (let r = 0; r < roomRows.length; r++) {
+                        const char = roomRows[r][room]
+                        if (!(char == chars[c] || char == '.')) continue gridLoop
+                    }
+                    const [min, max] = x < room ? [x, room] : [room, x]
+                    const hallway = grid[0].slice(1 + min, max)
+                    for (let h = 0; h < hallway.length; h++) {
+                        if (hallway[h] != '.') continue gridLoop
+                    }
+                    const dx = Math.abs(x - room)
+                    const dy = grid.filter((row, i) => i > 0 && row[room] === '.').length
                     grid[0][x] = '.'
-                    grid[dy][roomMap[t]] = chars[t]
-                    return (dx + dy) * costMap[t]
-                })
-                .reduce((sum, c) => sum + c, 0)
-            done = tempCost === 0
+                    grid[dy][room] = chars[c]
+                    tempCost += (dx + dy) * costMap[c]
+                }
+            done = tempCost == 0
             hallwayItemsCost += tempCost
         }
+        const topItems = []
+        for (let i = 0; i < chars.length; i++) {
+            const x = roomMap[i]
+            const roomRows = grid.slice(1)
 
-        const top_items = chars.map((_, t) => t)
-            .map(t => [t, grid.slice(1).map(row => row[roomMap[t]])])
-            .filter(([t, room]) => room.some(c => c !== '.' && c !== chars[t]))
-            .map(([t, room]) => [roomMap[t], room.findIndex(c => c !== '.')])
-            .map(([x, depth]) => [chars.indexOf(grid[depth + 1][x]), [x, depth + 1]])
+            const room = []
+            let depth = -1
+            let needsMove = false
+            for (let r = 0; r < roomRows.length; r++) {
+                const rc = roomRows[r][x]
+                if (depth < 0 && rc != '.') depth = r
+                if (!needsMove && (rc != '.' && rc != chars[i])) needsMove = true
+                room.push(rc)
+            }
 
-        const newStates = hallwayItemsCost && top_items.length === 0 ? [
+            if (!needsMove) continue
+            topItems.push([chars.indexOf(grid[depth + 1][x]), [x, depth + 1]])
+        }
+
+        const newStates = hallwayItemsCost && topItems.length === 0 ? [
             [hallwayItemsCost + cost, grid]
         ] : []
 
-        top_items.reduce(
+        topItems.reduce(
                 (states, [type, [x, y]]) =>
                 grid[0]
                 .map((c, x) => [c, x])
@@ -80,5 +103,12 @@ const solution = input => {
     )
     return { part1, part2 }
 }
+
+
+// const input = require('./input')
+
+// console.time('a')
+// console.log(solution(input))
+// console.timeEnd('a')
 
 module.exports = { solution }
