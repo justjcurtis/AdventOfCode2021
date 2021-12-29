@@ -44,6 +44,7 @@ const searchGrid = lines => {
             done = tempCost == 0
             hallwayItemsCost += tempCost
         }
+
         const topItems = []
         for (let i = 0; i < chars.length; i++) {
             const x = roomMap[i]
@@ -51,15 +52,15 @@ const searchGrid = lines => {
 
             const room = []
             let depth = -1
-            let needsMove = false
+            let shouldMove = false
             for (let r = 0; r < roomRows.length; r++) {
                 const rc = roomRows[r][x]
                 if (depth < 0 && rc != '.') depth = r
-                if (!needsMove && (rc != '.' && rc != chars[i])) needsMove = true
+                if (!shouldMove && (rc != '.' && rc != chars[i])) shouldMove = true
                 room.push(rc)
             }
 
-            if (!needsMove) continue
+            if (!shouldMove) continue
             topItems.push([chars.indexOf(grid[depth + 1][x]), [x, depth + 1]])
         }
 
@@ -75,7 +76,7 @@ const searchGrid = lines => {
                 .map(([, x]) => x)
                 .filter(h_x => grid[0].slice(Math.min(x, h_x), 1 + Math.max(x, h_x)).every(c => c === '.'))
                 .reduce((states, h_x) => {
-                    const state = grid.map(row => row.map(c => c))
+                    const state = grid.map(row => row.slice(0))
                     state[0][h_x] = chars[type]
                     state[y][x] = '.'
                     const new_cost = hallwayItemsCost + cost + (Math.abs(h_x - x) + y) * costMap[type]
@@ -103,12 +104,5 @@ const solution = input => {
     )
     return { part1, part2 }
 }
-
-
-// const input = require('./input')
-
-// console.time('a')
-// console.log(solution(input))
-// console.timeEnd('a')
 
 module.exports = { solution }
